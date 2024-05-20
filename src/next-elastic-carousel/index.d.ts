@@ -28,7 +28,8 @@ export type Breakpoint = {
 };
 
 export interface ReactElasticCarouselProps {
-  children: React.ReactNode
+  children: React.ReactNode;
+
   className?: string;
   // Defaults to 1
   itemsToShow?: number;
@@ -109,8 +110,6 @@ export interface ReactElasticCarouselProps {
   onResize?: (currentBreakpoint: Breakpoint) => void;
 }
 
-declare class ReactElasticCarousel extends React.Component<
-  ReactElasticCarouselProps
-> { }
+declare class ReactElasticCarousel extends React.Component<ReactElasticCarouselProps> {}
 
 export default ReactElasticCarousel;

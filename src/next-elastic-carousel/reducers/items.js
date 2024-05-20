@@ -1,4 +1,4 @@
-import { NEXT_ITEM, PREV_ITEM } from "../actions/consts";
+import { NEXT_ITEM, PREV_ITEM } from "../constants";
 
 export const activeIndexReducer = (state, action) => {
   const { limit, itemsToScroll, type } = action;
