@@ -3,8 +3,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-import ElasticCarousel from '../tiny-carousel/components/Carousel'
 import { useRef } from "react";
+import ElasticCarousel from "@/next-elastic-carousel";
 
 export default function Home() {
 

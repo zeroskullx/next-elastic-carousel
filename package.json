@@ -1,6 +1,6 @@
 {
-  "name": "tiny-carousel",
-  "version": "0.1.0",
+  "name": "next-elastic-carousel",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
