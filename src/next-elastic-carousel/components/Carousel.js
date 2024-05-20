@@ -7,7 +7,7 @@ import { StyleSheetManager } from "styled-components";
 import Only from "./OnlyWhen";
 import Track from "./Track";
 import Arrow from "./Arrow";
-import consts from "../consts";
+import consts from "../constants";
 import { activeIndexReducer } from "../reducers/items";
 import { nextItemAction, prevItemAction } from "../actions/itemsActions";
 import {

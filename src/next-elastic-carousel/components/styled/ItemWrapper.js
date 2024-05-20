@@ -1,7 +1,7 @@
 import styled, { StyleSheetManager } from "styled-components";
 import PropTypes from "prop-types";
 import { cssPrefix } from "../../utils/helpers";
-import consts from "../../consts";
+import consts from "../../constants";
 
 const ItemWrapper = styled.div.attrs(({ style }) => ({
   style,
