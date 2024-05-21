@@ -1,9 +1,13 @@
 {
   "name": "next-elastic-carousel",
   "version": "1.0.1",
-  "author": "Zeroskullx",
+  "description": "A flexible and responsive carousel component for react",
+  "author": "Zeroskullx (Rogerio Felix)",
   "license": "MIT",
-  "repository": "zeroskullx/next-elastic-carousel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeroskullx/next-elastic-carousel.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "./dist/index.d.ts",
@@ -26,12 +30,13 @@
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.2",
     "classnames": "^2.5.1",
-    "next": "14.2.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "react-swipeable": "^7.0.1",
-    "resize-observer-polyfill": "^1.5.1",
-    "sass": "^1.77.2",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.5.4",
+    "react": "^18",
+    "react-dom": "^18",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
@@ -49,7 +54,10 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
     "eslint-config-prettier": "^9.1.0",
+    "next": "14.2.3",
     "prettier": "^3.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "rollup": "^4.17.2",
     "rollup-plugin-alias": "^2.2.0",
     "rollup-plugin-auto-external": "^2.0.0",
@@ -59,9 +67,25 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-url": "^3.0.1",
+    "sass": "^1.77.2",
+    "styled-components": "^6.1.11",
     "typescript": "^5.4.5"
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "react",
+    "react-carousel",
+    "carousel",
+    "responsive",
+    "reactjs",
+    "carrousel",
+    "slides",
+    "flexibale",
+    "rtl",
+    "right-to-left",
+    "resize",
+    "touch"
   ]
 }
