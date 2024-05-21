@@ -1,115 +1,109 @@
 /* eslint no-unused-vars: 0 */ // --> OFF
 /* eslint no-undef: 0 */ // --> OFF
-import * as React from "react";
+import * as React from 'react'
 
 export type RenderArrowProps = {
-  type: "PREV" | "NEXT";
-  onClick: () => void;
-  isEdge: boolean;
-};
+  type: 'PREV' | 'NEXT'
+  onClick: () => void
+  isEdge: boolean
+}
 
 export type RenderPaginationProps = {
-  pages: number[];
-  activePage: number;
+  pages: number[]
+  activePage: number
   // The onClick event that sets the state of the carousel and sends
   // it to a specific page.
-  onClick: (indicatorId: string) => void;
-};
+  onClick: (indicatorId: string) => void
+}
 
 export type ItemObject = {
   // Children's props
-  object: any;
-  index: number;
-};
+  object: any
+  index: number
+}
 
 export type Breakpoint = {
-  itemsToScroll: number;
-  itemsToShow: number;
-};
+  itemsToScroll: number
+  itemsToShow: number
+}
 
-export interface ReactElasticCarouselProps {
-  children: React.ReactNode;
+export interface NextElasticCarouselProps {
+  children: React.ReactNode
 
-  className?: string;
+  className?: string
   // Defaults to 1
-  itemsToShow?: number;
+  itemsToShow?: number
   // Defaults to false
-  verticalMode?: boolean;
+  verticalMode?: boolean
   // Defaults to false
-  isRTL: boolean;
+  isRTL: boolean
   // Defaults to true
-  pagination?: boolean;
+  pagination?: boolean
   // Defaults to 500
-  transitionMs?: number;
+  transitionMs?: number
   // Defaults to "ease"
-  easing?: string;
+  easing?: string
   // Defaults to "ease"
-  tiltEasing?: string;
+  tiltEasing?: string
   // Defaults to true.
-  enableTilt?: boolean;
+  enableTilt?: boolean
   // Defaults to 1
-  itemsToScroll?: number;
+  itemsToScroll?: number
   // Collection of objects with a width, itemsToShow and itemsToScroll
   breakPoints?: {
-    width: number;
-    itemsToShow?: number;
-    itemsToScroll?: number;
-  }[];
+    width: number
+    itemsToShow?: number
+    itemsToScroll?: number
+  }[]
   // Defaults to 0
-  initialActiveIndex?: number;
+  initialActiveIndex?: number
   // Defaults to 0
-  initialFirstItem?: number;
+  initialFirstItem?: number
   // Defaults to true
-  showArrows?: boolean;
+  showArrows?: boolean
   // Defaults to false (not compatible with verticalMode yet !)
-  showEmptySlots?: boolean;
+  showEmptySlots?: boolean
   // Defaults to true
-  disableArrowsOnEnd?: boolean;
+  disableArrowsOnEnd?: boolean
   // Defaults to boolean
-  focusOnSelect?: boolean;
+  focusOnSelect?: boolean
   // Function to generate your own navigation arrows.
-  renderArrow?: (props: RenderArrowProps) => void;
+  renderArrow?: (props: RenderArrowProps) => void
   // Function to generate your own pagination component.
-  renderPagination?: (props: RenderPaginationProps) => JSX.Element;
+  renderPagination?: (props: RenderPaginationProps) => JSX.Element
   // Defaults to "CENTER"
-  itemPosition?: "START" | "CENTER" | "END";
+  itemPosition?: 'START' | 'CENTER' | 'END'
   // A padding for each element - Defaults to [0,0,0,0]
-  itemPadding?: number[];
+  itemPadding?: number[]
   // A margin at the beginning and at the end of the carousel - Defaults to 0 (not compatible with verticalMode yet !)
-  outerSpacing?: number;
+  outerSpacing?: number
   // Enable or disable swipe - Defaults to true
-  enableSwipe?: boolean;
+  enableSwipe?: boolean
   /** Enable or disable mouse swipe */
-  enableMouseSwipe?: boolean;
+  enableMouseSwipe?: boolean
   /** Prevent page scroll on touchmove.
    * Use this to stop the browser from scrolling while a user swipes.
    * More details: https://github.com/FormidableLabs/react-swipeable#preventdefaulttouchmoveevent-details
    */
-  preventDefaultTouchmoveEvent?: boolean;
+  preventDefaultTouchmoveEvent?: boolean
   // Enable or disable auto play - Defaults to true
-  enableAutoPlay?: boolean;
+  enableAutoPlay?: boolean
   /** Set auto play speed (ms) - Defaults to 2000 */
-  autoPlaySpeed?: number;
+  autoPlaySpeed?: number
   // A callback for the change of an item
-  onChange?: (currentItemObject: ItemObject, currentPageIndex: number) => void;
+  onChange?: (currentItemObject: ItemObject, currentPageIndex: number) => void
   //  A callback for the beginning of the next transition
-  onNextStart?: (
-    prevItemObject: ItemObject,
-    nextItemObject: ItemObject
-  ) => void;
+  onNextStart?: (prevItemObject: ItemObject, nextItemObject: ItemObject) => void
   // A callback for the beginning of the prev transition
-  onPrevStart?: (
-    prevItemObject: ItemObject,
-    nextItemObject: ItemObject
-  ) => void;
+  onPrevStart?: (prevItemObject: ItemObject, nextItemObject: ItemObject) => void
   //  A callback for the end of the next transition
-  onNextEnd?: (nextItemObject: ItemObject, currentPageIndex: number) => void;
+  onNextEnd?: (nextItemObject: ItemObject, currentPageIndex: number) => void
   //  A callback for the end of the prev transition
-  onPrevEnd?: (nextItemObject: ItemObject, currentPageIndex: number) => void;
+  onPrevEnd?: (nextItemObject: ItemObject, currentPageIndex: number) => void
   // A callback for the "slider-container" resize
-  onResize?: (currentBreakpoint: Breakpoint) => void;
+  onResize?: (currentBreakpoint: Breakpoint) => void
 }
 
-declare class ReactElasticCarousel extends React.Component<ReactElasticCarouselProps> {}
+declare class NextElasticCarousel extends React.Component<NextElasticCarouselProps> {}
 
-export default ReactElasticCarousel;
+export default NextElasticCarousel
