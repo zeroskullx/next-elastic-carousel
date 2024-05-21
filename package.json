@@ -1,12 +1,27 @@
 {
   "name": "next-elastic-carousel",
   "version": "1.0.0",
-  "private": true,
+  "author": "Zeroskullx",
+  "license": "MIT",
+  "repository": "zeroskullx/next-elastic-carousel",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "jsnext:main": "dist/index.es.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "engines": {
+    "node": ">=21",
+    "npm": ">=10"
+  },
+  "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:demo": "next build",
+    "build:carousel": "rollup -c"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.2",
@@ -20,11 +35,27 @@
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-react": "^7.24.1",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "eslint": "^9.3.0",
     "eslint-config-next": "14.2.3",
+    "rollup": "^4.17.2",
+    "rollup-plugin-alias": "^2.2.0",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-url": "^3.0.1",
     "typescript": "^5.4.5"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
