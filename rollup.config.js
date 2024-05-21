@@ -6,6 +6,7 @@ import postcss from 'rollup-plugin-postcss';
 import resolve from 'rollup-plugin-node-resolve';
 import url from 'rollup-plugin-url';
 import alias from 'rollup-plugin-alias';
+import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json' assert { type: 'json' };
 
@@ -37,18 +38,7 @@ export default {
     url(),
     babel({
       exclude: 'node_modules/**',
-      presets: [
-        [
-          '@babel/preset-env',
-          {
-            modules: false
-          }
-        ],
-        '@babel/preset-react'
-      ],
-      plugins: [
-        '@babel/plugin-proposal-class-properties'
-      ]
+      presets: ['@babel/preset-react']
     }),
     resolve(),
     commonjs({
@@ -57,9 +47,10 @@ export default {
         'node_modules/react-is/index.js': ['isValidElementType']
       }
     }),
+    terser(), // minifies generated bundles
     copy({
       targets: [{ src: `src/${libName}/index.d.ts`, dest: "dist" }],
     })
-  ],
-  external: ['prop-types'] // Mark prop-types as an external dependency
+  ]
+
 }
