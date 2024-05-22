@@ -38,11 +38,21 @@ export default {
     url(),
     babel({
       exclude: 'node_modules/**',
-      presets: ['@babel/preset-react'],
-      babelHelpers: 'bundled'
+      presets: [
+        ["@babel/preset-env", {
+          "modules": false
+        }],
+        ["@babel/preset-react", {
+          "runtime": "automatic"
+        }]
+      ],
+      plugins: ["@babel/plugin-transform-class-properties", "@babel/external-helpers"],
+      babelHelpers: 'external'
     }),
     resolve(),
-    commonjs(),
+    commonjs({
+      include: 'node_modules/**'
+    }),
     //terser(), // minifies generated bundles
     copy({
       targets: [{ src: `src/${libName}/index.d.ts`, dest: "dist" }],

@@ -41,6 +41,9 @@
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.5",
+    "@babel/plugin-external-helpers": "^7.24.1",
+    "@babel/plugin-transform-class-properties": "^7.24.1",
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
     "@rollup/plugin-alias": "^5.1.0",

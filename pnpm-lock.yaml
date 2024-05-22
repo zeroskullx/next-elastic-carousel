@@ -22,6 +22,15 @@ dependencies:
     version: 1.5.1
 
 devDependencies:
+  '@babel/core':
+    specifier: ^7.24.5
+    version: 7.24.5
+  '@babel/plugin-external-helpers':
+    specifier: ^7.24.1
+    version: 7.24.1(@babel/core@7.24.5)
+  '@babel/plugin-transform-class-properties':
+    specifier: ^7.24.1
+    version: 7.24.1(@babel/core@7.24.5)
   '@babel/preset-env':
     specifier: ^7.24.5
     version: 7.24.5(@babel/core@7.24.5)
@@ -454,6 +463,16 @@ packages:
     dependencies:
       '@babel/core': 7.24.5
       '@babel/helper-environment-visitor': 7.22.20
+      '@babel/helper-plugin-utils': 7.24.5
+    dev: true
+
+  /@babel/plugin-external-helpers@7.24.1(@babel/core@7.24.5):
+    resolution: {integrity: sha512-l3JgdWBntLRPvZkKzHmc0z+AkI91MmXOJUAeUlHbCYfgv8qLZPcYYsAIdY3iLG3TYIDDCC6Ob+e1knlniSX6fA==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    dependencies:
+      '@babel/core': 7.24.5
       '@babel/helper-plugin-utils': 7.24.5
     dev: true
 
