@@ -28,9 +28,6 @@ devDependencies:
   '@babel/plugin-external-helpers':
     specifier: ^7.24.1
     version: 7.24.1(@babel/core@7.24.5)
-  '@babel/plugin-transform-class-properties':
-    specifier: ^7.24.1
-    version: 7.24.1(@babel/core@7.24.5)
   '@babel/preset-env':
     specifier: ^7.24.5
     version: 7.24.5(@babel/core@7.24.5)

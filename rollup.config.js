@@ -46,8 +46,7 @@ export default {
           "runtime": "automatic"
         }]
       ],
-      plugins: ["@babel/plugin-transform-class-properties", "@babel/external-helpers"],
-      babelHelpers: 'external'
+      babelHelpers: 'bundled'
     }),
     resolve(),
     commonjs({
