@@ -1,12 +1,12 @@
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
+import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
+import url from '@rollup/plugin-url';
+import resolve from '@rollup/plugin-node-resolve';
+import alias from '@rollup/plugin-alias';
+import terser from '@rollup/plugin-terser';
 import copy from "rollup-plugin-copy";
 import external from "rollup-plugin-auto-external";
 import postcss from 'rollup-plugin-postcss';
-import resolve from 'rollup-plugin-node-resolve';
-import url from 'rollup-plugin-url';
-import alias from 'rollup-plugin-alias';
-import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json' assert { type: 'json' };
 
@@ -38,16 +38,12 @@ export default {
     url(),
     babel({
       exclude: 'node_modules/**',
-      presets: ['@babel/preset-react']
+      presets: ['@babel/preset-react'],
+      babelHelpers: 'bundled'
     }),
     resolve(),
-    commonjs({
-      include: 'node_modules/**',
-      namedExports: {
-        'node_modules/react-is/index.js': ['isValidElementType']
-      }
-    }),
-    terser(), // minifies generated bundles
+    commonjs(),
+    //terser(), // minifies generated bundles
     copy({
       targets: [{ src: `src/${libName}/index.d.ts`, dest: "dist" }],
     })
