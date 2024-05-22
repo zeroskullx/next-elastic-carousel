@@ -52,6 +52,9 @@ devDependencies:
   babel-jest:
     specifier: ^29.7.0
     version: 29.7.0(@babel/core@7.24.5)
+  clsx:
+    specifier: ^2.1.1
+    version: 2.1.1
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
@@ -2980,6 +2983,11 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: true
+
+  /clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
     dev: true
 
   /co@4.6.0:

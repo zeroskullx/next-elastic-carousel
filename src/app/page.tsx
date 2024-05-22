@@ -1,135 +1,72 @@
 'use client'
 
-import Image from "next/image";
-import styles from "./page.module.scss";
-
 import { useRef } from "react";
-import ElasticCarousel from "@/next-elastic-carousel";
+
+import styles from "./page.module.scss";
+import NextElasticCarousel from "@/next-elastic-carousel";
+
 
 export default function Home() {
-
   const carouselRef = useRef<any>(null)
   let resetTimeout: any
   const enableAutoPlay = true
   const autoPlaySpeed = 333000
   const totalPages = 3
 
-  return (
-    <main className={styles.main}>
+  return <div className={styles.main}>
+    <div className={styles.header}>
+      <p>Next Elastic Carousel</p>
+    </div>
+    <div className={styles.body}>
+      <div className={styles.sidebar}>
+        <div className={styles.custom_link}>Getting started</div>
+      </div>
+      <div className={styles.container}>
+        <h1>Getting started</h1>
+        <h2>Install</h2>
+        <div className={styles.code}>
+          <code>npm install next-elastic-carousel</code>
+        </div>
 
-      <ElasticCarousel
-        ref={carouselRef}
-        className={'carousel-custom'}
-        isRTL={false}
-        showArrows={false}
-        pagination={true}
-        itemsToShow={1}
-        itemsToScroll={1}
-        enableAutoPlay={enableAutoPlay}
-        autoPlaySpeed={autoPlaySpeed}
-        onNextEnd={({ index }: { index: any }) => {
-          if (enableAutoPlay) {
-            clearTimeout(resetTimeout)
-            if (index + 1 === totalPages) {
-              resetTimeout = setTimeout(() => {
-                if (carouselRef?.current) carouselRef.current.goTo(0)
-              }, autoPlaySpeed) // same time
-            }
-          }
-        }}
-      >
-        <div>Page 1</div>
-        <div>Page 2</div>
-        <div>Page 3</div>
-        <div>Page 4</div>
-      </ElasticCarousel>
+        <h2>Import</h2>
+        <div className={styles.code}>
+          <code>{`import Carousel from 'next-elastic-carousel'`}</code>
+        </div>
 
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+        <div className={styles.carousel_wrapper}>
+          <div className={styles.carousel_container}>
+            <div className={styles.live_preview}>
+              <NextElasticCarousel
+                ref={carouselRef}
+                className={'carousel-custom'}
+                isRTL={false}
+                showArrows={true}
+                pagination={true}
+                itemsToShow={1}
+                itemsToScroll={1}
+                enableAutoPlay={enableAutoPlay}
+                autoPlaySpeed={autoPlaySpeed}
+                onNextEnd={({ index }: { index: any }) => {
+                  if (enableAutoPlay) {
+                    clearTimeout(resetTimeout)
+                    if (index + 1 === totalPages) {
+                      resetTimeout = setTimeout(() => {
+                        if (carouselRef?.current) carouselRef.current.goTo(0)
+                      }, autoPlaySpeed) // same time
+                    }
+                  }
+                }}
+              >
+                <div className={styles.card}>Page 1</div>
+                <div className={styles.card}>Page 2</div>
+                <div className={styles.card}>Page 3</div>
+                <div className={styles.card}>Page 4</div>
+                <div className={styles.card}>Page 5</div>
+              </NextElasticCarousel>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+    </div>
+  </div >
 }
