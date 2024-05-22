@@ -37,6 +37,7 @@ export default function Home() {
           <div className={styles.carousel_container}>
             <div className={styles.live_preview}>
               <NextElasticCarousel
+                renderLoading={<Loading />}
                 ref={carouselRef}
                 className={'carousel-custom'}
                 isRTL={false}
@@ -69,4 +70,9 @@ export default function Home() {
       </div>
     </div>
   </div >
+}
+
+
+const Loading = () => {
+  return <div className={styles.loading}>Lendo...</div>
 }

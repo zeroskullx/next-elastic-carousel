@@ -14,7 +14,8 @@ import {
   SliderContainer,
   Slider,
   StyledCarousel,
-  CarouselWrapper
+  CarouselWrapper,
+  Loading
 } from "./styled";
 import { pipe, noop, cssPrefix, numberToArray } from "../utils/helpers";
 import { Pagination } from "./Pagination";
@@ -796,7 +797,8 @@ class Carousel extends React.Component {
       disableArrowsOnEnd,
       preventDefaultTouchmoveEvent,
       renderArrow,
-      renderPagination
+      renderPagination,
+      renderLoading
     } = this.getDerivedPropsFromBreakPoint();
 
     const childWidth = this.calculateChildWidth();
@@ -811,7 +813,11 @@ class Carousel extends React.Component {
     const disabledPrevArrow = !canSlidePrev && disableArrowsOnEnd;
     const disabledNextArrow = !canSlideNext && disableArrowsOnEnd;
 
-    return (
+    return (<>
+      {rootHeight === 0 && <>
+        {renderLoading ? renderLoading : <Loading>Loading...</Loading>}
+      </>}
+
       <CarouselWrapper
         isRTL={isRTL}
         className={`${cssPrefix("carousel-wrapper")} ${className}`}
@@ -820,6 +826,7 @@ class Carousel extends React.Component {
         <StyledCarousel
           className={cssPrefix("carousel")}
           size={{ height: rootHeight }}
+          opacity={rootHeight > 0 ? 1 : 0}
         >
           <Only when={showArrows}>
             {renderArrow ? (
@@ -893,7 +900,7 @@ class Carousel extends React.Component {
             )}
           </Only>
         </StyledCarousel>
-        <Only when={pagination}>
+        {rootHeight > 0 && <Only when={pagination}>
           {renderPagination ? (
             renderPagination({
               pages: pages,
@@ -907,8 +914,9 @@ class Carousel extends React.Component {
               onClick={this.onIndicatorClick}
             />
           )}
-        </Only>
+        </Only>}
       </CarouselWrapper>
+    </>
     );
   }
 }
@@ -1026,6 +1034,8 @@ Carousel.propTypes = {
    * - ({ pages, activePage, onClick }) =>  <YourComponent/>
    */
   renderPagination: PropTypes.func,
+
+  renderLoading: PropTypes.node,
 
   /** Position the element relative to it's wrapper (use the consts object) - consts.START | consts.CENTER | consts.END */
   itemPosition: PropTypes.oneOf([consts.START, consts.CENTER, consts.END]),

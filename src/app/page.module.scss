@@ -358,3 +358,11 @@
   color: #ffffff;
   background-color: var(--theme-ui-colors-card-bg, #673ab7);
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  height: 280px;
+}
