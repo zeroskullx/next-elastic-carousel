@@ -62,7 +62,7 @@ export default function PageCarousel() {
   ]
 
   return (
-    <Carousel isRTL={false}>
+    <Carousel>
       {items.map((item) => (
         <div key={item.id}>{item.title}</div>
       ))}
