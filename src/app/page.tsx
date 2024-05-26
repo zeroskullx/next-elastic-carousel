@@ -6,12 +6,22 @@ import styles from "./page.module.scss";
 import NextElasticCarousel from "@/next-elastic-carousel";
 
 
+
+
 export default function Home() {
   const carouselRef = useRef<any>(null)
   let resetTimeout: any
   const enableAutoPlay = true
   const autoPlaySpeed = 333000
   const totalPages = 3
+
+  const items = [
+    { id: 1, title: 'Page 1' },
+    { id: 2, title: 'Page 2' },
+    { id: 3, title: 'Page 3' },
+    { id: 4, title: 'Page 4' },
+    { id: 5, title: 'Page 5' },
+  ]
 
   return <div className={styles.main}>
     <div className={styles.header}>
@@ -40,7 +50,6 @@ export default function Home() {
                 renderLoading={<Loading />}
                 ref={carouselRef}
                 className={'carousel-custom'}
-                isRTL={false}
                 showArrows={true}
                 pagination={true}
                 itemsToShow={1}
@@ -58,11 +67,9 @@ export default function Home() {
                   }
                 }}
               >
-                <div className={styles.card}>Page 1</div>
-                <div className={styles.card}>Page 2</div>
-                <div className={styles.card}>Page 3</div>
-                <div className={styles.card}>Page 4</div>
-                <div className={styles.card}>Page 5</div>
+                {items.map((item) => (
+                  <div key={item.id} className={styles.card}>{item.title}</div>
+                ))}
               </NextElasticCarousel>
             </div>
           </div>
@@ -74,5 +81,5 @@ export default function Home() {
 
 
 const Loading = () => {
-  return <div className={styles.loading}>Lendo...</div>
+  return <div className={styles.loading}>Loading...</div>
 }

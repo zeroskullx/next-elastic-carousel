@@ -38,7 +38,7 @@ export interface NextElasticCarouselProps {
   // Defaults to false
   verticalMode?: boolean
   // Defaults to false
-  isRTL: boolean
+  isRTL?: boolean
   // Defaults to true
   pagination?: boolean
   // Defaults to 500
