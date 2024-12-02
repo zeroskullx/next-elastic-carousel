@@ -1,4 +1,4 @@
-import styled, { StyleSheetManager } from 'styled-components';
+import styled from '@emotion/styled'
 
 const CarouselWrapperDiv = styled.div`
   display: flex;
@@ -6,11 +6,8 @@ const CarouselWrapperDiv = styled.div`
   align-items: center;
   width: 100%;
   direction: ${({ isRTL }) => (isRTL ? 'rtl' : 'ltr')};
-`;
+  height: ${(props) => props.size?.height};
+  overflow: ${(props) => props.overflow};
+`
 
-export default function CarouselWrapper({ isRTL, children, className }) {
-
-  return <StyleSheetManager shouldForwardProp={(prop) => prop !== 'isRTL'}>
-    <CarouselWrapperDiv isRTL={isRTL} className={className}>{children}</CarouselWrapperDiv>
-  </StyleSheetManager>
-}
+export default CarouselWrapperDiv

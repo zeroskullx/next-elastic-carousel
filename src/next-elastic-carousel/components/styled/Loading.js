@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from '@emotion/styled'
 
 export default styled.div`
   width: 100%;
@@ -6,4 +6,5 @@ export default styled.div`
   padding: 1rem;
   justify-content: center;
   align-items: center;
-`;
+  height: ${(props) => props.size?.height};
+`

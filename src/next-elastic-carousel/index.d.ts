@@ -30,7 +30,10 @@ export type Breakpoint = {
 export interface NextElasticCarouselProps {
   children: React.ReactNode
 
+  // Defaults to null
   renderLoading?: React.ReactNode
+
+  itemHeight?: number | string
 
   className?: string
   // Defaults to 1
