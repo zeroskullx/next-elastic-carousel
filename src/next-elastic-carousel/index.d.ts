@@ -95,6 +95,12 @@ export interface NextElasticCarouselProps {
   enableAutoPlay?: boolean
   /** Set auto play speed (ms) - Defaults to 2000 */
   autoPlaySpeed?: number
+  /**
+   * Enable or disable the next prev back at the end of the carousel.
+   * If onNextEnd is defined, this will be ignored.
+   * - Defaults to true
+   */
+  enableNextEndBack?: boolean
   // A callback for the change of an item
   onChange?: (currentItemObject: ItemObject, currentPageIndex: number) => void
   //  A callback for the beginning of the next transition

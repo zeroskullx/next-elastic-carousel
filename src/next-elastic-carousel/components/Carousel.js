@@ -622,19 +622,55 @@ class Carousel extends React.Component {
   }
 
   onNextEnd = () => {
-    // if (this.isHoverActive) {
-    //   return
-    // }
+    const { onNextEnd, onChange } = this.getDerivedPropsFromBreakPoint()
     const { activeIndex, activePage } = this.state
 
-    console.log('onNextEnd', this.isHoverActive)
-
-    const { onNextEnd, onChange } = this.getDerivedPropsFromBreakPoint()
     const nextItemObj = this.convertChildToCbObj(activeIndex)
     this.removeSliderTransitionHook(this.onNextEnd)
     this.setState({ transitioning: false })
     onChange && onChange(nextItemObj, activePage)
+
+    if (onNextEnd === noop) {
+      this.onNextEndBack(activePage)
+      return
+    }
     onNextEnd(nextItemObj, activePage)
+  }
+
+  onNextEndBack = (activePage) => {
+    const { autoPlaySpeed, itemsToShow, enableNextEndBack } =
+      this.getDerivedPropsFromBreakPoint()
+    const { pages } = this.state
+
+    if (!enableNextEndBack) {
+      return
+    }
+
+    this.clearTimeOutId()
+
+    console.log('onNextEnd', activePage, pages.length, this.timeOutId)
+
+    if (itemsToShow > 1) {
+      if (activePage === pages.length - 1) {
+        this.timeOutId = setTimeout(() => {
+          this.goTo(0, 'sys')
+        }, autoPlaySpeed)
+      }
+      return
+    }
+
+    if (activePage + 1 === pages.length) {
+      this.timeOutId = setTimeout(() => {
+        this.goTo(0, 'sys')
+      }, autoPlaySpeed) // same time
+    }
+  }
+
+  clearTimeOutId = () => {
+    if (this.timeOutId) {
+      clearTimeout(this.timeOutId)
+      this.timeOutId = null
+    }
   }
 
   onPrevEnd = () => {
@@ -644,7 +680,7 @@ class Carousel extends React.Component {
 
     const { onPrevEnd, onChange } = this.getDerivedPropsFromBreakPoint()
     const { activeIndex, activePage } = this.state
-    console.log('onPrevEnd', this.isHoverActive, activePage)
+    //console.log('onPrevEnd', this.isHoverActive, activePage)
 
     const nextItemObj = this.convertChildToCbObj(activeIndex)
     this.removeSliderTransitionHook(this.onPrevEnd)
@@ -657,11 +693,11 @@ class Carousel extends React.Component {
     (direction, nextItemId, verticalMode, isActionBlock, rest) => (state) => {
       const { sliderPosition, childHeight, activeIndex } = state
 
-      console.log('SL-POSITION: generatePositionUpdater', {
-        sliderPosition,
-        childHeight,
-        activeIndex,
-      })
+      //console.log('SL-POSITION: generatePositionUpdater', {
+      //   sliderPosition,
+      //   childHeight,
+      //   activeIndex,
+      // })
 
       if (isActionBlock) {
         return
@@ -688,7 +724,7 @@ class Carousel extends React.Component {
     }
 
   goTo = (nextItemId, deOnde) => {
-    console.log('GOTO....:', { nextItemId, deOnde })
+    //console.log('GOTO....:', { nextItemId, deOnde })
     this.nextTempItemId = nextItemId
 
     const { children, verticalMode, itemsToShow } =
@@ -767,7 +803,7 @@ class Carousel extends React.Component {
   }
 
   updateActivePage = () => {
-    console.log('UPDATE ACTIVE PAGE updateActivePage:')
+    //console.log('UPDATE ACTIVE PAGE updateActivePage:')
 
     this.setState((state) => {
       const { itemsToShow, children } = this.getDerivedPropsFromBreakPoint()
@@ -802,6 +838,7 @@ class Carousel extends React.Component {
   }
 
   onMouseLeave = () => {
+    //TODO: Improve this code to resume from where it left off when using onSwiping
     const { itemsToShow, enableAutoPlay } = this.getDerivedPropsFromBreakPoint()
 
     if (!enableAutoPlay) {
@@ -811,7 +848,7 @@ class Carousel extends React.Component {
     this.isHoverActive = false
 
     const { activeIndex } = this.state
-    console.log('onMouseLeave', this.state, this.nextTempItemId)
+    //console.log('onMouseLeave', this.state, this.nextTempItemId)
 
     //Fix for the carousel not sliding when the mouse leaves from the latest item
     if (this.nextTempItemId === 0) {
@@ -1033,6 +1070,7 @@ Carousel.defaultProps = {
   outerSpacing: 0,
   enableAutoPlay: false,
   autoPlaySpeed: 2000,
+  enableNextEndBack: true,
 
   // callbacks
   onChange: noop,
@@ -1155,6 +1193,9 @@ Carousel.propTypes = {
 
   /** Set auto play speed (ms) */
   autoPlaySpeed: PropTypes.number,
+
+  /** Enable or disable the nextEndBack feature */
+  enableNextEndBack: PropTypes.bool,
 
   // callbacks
   /** A callback for the change of an item
