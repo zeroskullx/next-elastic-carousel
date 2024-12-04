@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { useSwipeable } from "react-swipeable";
-import { cssPrefix } from "../utils/helpers";
-import ItemWrapperContainer from "./ItemWrapperContainer";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { useSwipeable } from 'react-swipeable'
+import { cssPrefix } from '../utils/helpers'
+import ItemWrapperContainer from './ItemWrapperContainer'
 
 const Track = ({
   children,
@@ -19,32 +19,32 @@ const Track = ({
   onSwiped,
   onSwiping,
   verticalMode,
-  onItemClick
+  onItemClick,
 }) => {
-  const width = `${childWidth}px`;
-  const paddingStyle = `${itemPadding.join("px ")}px`;
-  const minVisibleItem = currentItem;
-  const maxVisibleItem = currentItem + itemsToShow;
-  const prevItem = minVisibleItem - itemsToScroll;
-  const nextItem = maxVisibleItem + itemsToScroll;
+  const width = `${childWidth}px`
+  const paddingStyle = `${itemPadding?.join('px ')}px`
+  const minVisibleItem = currentItem
+  const maxVisibleItem = currentItem + itemsToShow
+  const prevItem = minVisibleItem - itemsToScroll
+  const nextItem = maxVisibleItem + itemsToScroll
 
   const originalChildren = React.Children.map(children, (child, idx) => {
-    const isVisible = idx >= minVisibleItem && idx < maxVisibleItem;
-    const isPrevItem = !isVisible && idx >= prevItem && idx < currentItem;
-    const isNextItem = !isVisible && idx < nextItem && idx > currentItem;
-    const itemClass = "carousel-item";
+    const isVisible = idx >= minVisibleItem && idx < maxVisibleItem
+    const isPrevItem = !isVisible && idx >= prevItem && idx < currentItem
+    const isNextItem = !isVisible && idx < nextItem && idx > currentItem
+    const itemClass = 'carousel-item'
 
     const childToRender = autoTabIndexVisibleItems
       ? React.cloneElement(child, {
-        tabIndex: isVisible ? 0 : -1
-      })
-      : child;
+          tabIndex: isVisible ? 0 : -1,
+        })
+      : child
     return (
       <div
         className={cssPrefix(
           itemClass,
           `${itemClass}-${idx}`,
-          `${itemClass}-${isVisible ? "visible" : "hidden"}`,
+          `${itemClass}-${isVisible ? 'visible' : 'hidden'}`,
           isPrevItem && `${itemClass}-prev`,
           isNextItem && `${itemClass}-next`
         )}
@@ -59,8 +59,8 @@ const Track = ({
           {childToRender}
         </ItemWrapperContainer>
       </div>
-    );
-  });
+    )
+  })
 
   const handlers = useSwipeable({
     stopPropagation: true,
@@ -68,25 +68,27 @@ const Track = ({
     trackMouse: enableMouseSwipe,
     onSwiped: onSwiped,
     onSwiping: onSwiping,
-    className: cssPrefix("swipable"),
+    className: cssPrefix('swipable'),
 
     enableMouseSwipe: enableMouseSwipe,
     enableSwipe: enableSwipe,
   })
 
-
-
   const toRender = enableSwipe ? (
-    <div style={{
-      display: "flex",
-      flexDirection: verticalMode ? "column" : "row"
-    }
-    } {...handlers}>{originalChildren}</div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: verticalMode ? 'column' : 'row',
+      }}
+      {...handlers}
+    >
+      {originalChildren}
+    </div>
   ) : (
     originalChildren
-  );
-  return toRender;
-};
+  )
+  return toRender
+}
 
 Track.propTypes = {
   children: PropTypes.array.isRequired,
@@ -102,7 +104,7 @@ Track.propTypes = {
   preventDefaultTouchmoveEvent: PropTypes.bool,
   onSwiped: PropTypes.func,
   onSwiping: PropTypes.func,
-  onItemClick: PropTypes.func
-};
+  onItemClick: PropTypes.func,
+}
 
-export default Track;
+export default Track

@@ -22,6 +22,8 @@ import { Pagination } from './Pagination'
 
 class Carousel extends React.Component {
   isComponentMounted = false
+  isHoverActive = false
+
   state = {
     rootHeight: 0,
     childHeight: 0,
@@ -44,6 +46,8 @@ class Carousel extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    //console.log('componentDidUpdate', prevProps, prevState)
+
     const {
       enableAutoPlay,
       children,
@@ -88,7 +92,10 @@ class Carousel extends React.Component {
       const isOutOfRange = activeIndex + calculatedItemsToShow > lastIndex
       if (isOutOfRange) {
         // we are out of boundaries, go "back" to last item of the list (respect itemsToShow)
-        this.goTo(Math.max(0, currentChildrenLength - calculatedItemsToShow))
+        this.goTo(
+          Math.max(0, currentChildrenLength - calculatedItemsToShow),
+          'componentDidUpdate'
+        )
       }
     }
   }
@@ -520,11 +527,11 @@ class Carousel extends React.Component {
         // up or down
         if (swipedDown) {
           // func = this.onPrevStart;
-          func = () => this.goTo(backSlidesToGo)
+          func = () => this.goTo(backSlidesToGo, 'swipedDown')
         }
         if (swipedUp) {
           // func = this.onNextStart;
-          func = () => this.goTo(forwardSlideTtoGo)
+          func = () => this.goTo(forwardSlideTtoGo, 'swipedUp')
         }
       } else {
         // get number of slides from user's swiping
@@ -545,21 +552,21 @@ class Carousel extends React.Component {
           // flip sides
           if (swipedLeft) {
             // func = this.onPrevStart;
-            func = () => this.goTo(backSlidesToGo)
+            func = () => this.goTo(backSlidesToGo, 'swipedLeft')
           }
           if (swipedRight) {
             // func = this.onNextStart;
-            func = () => this.goTo(forwardSlideTtoGo)
+            func = () => this.goTo(forwardSlideTtoGo, 'swipedRight')
           }
         } else {
           // normal behavior
           if (swipedLeft) {
             // func = this.onNextStart;
-            func = () => this.goTo(forwardSlideTtoGo)
+            func = () => this.goTo(forwardSlideTtoGo, 'swipedLeft')
           }
           if (swipedRight) {
             // func = this.onPrevStart;
-            func = () => this.goTo(backSlidesToGo)
+            func = () => this.goTo(backSlidesToGo, 'swipedRight')
           }
         }
       }
@@ -571,12 +578,13 @@ class Carousel extends React.Component {
   }
 
   onNextStart = (options) => {
+    //console.log('onNextStart', options)
     const { onNextStart } = this.getDerivedPropsFromBreakPoint()
     const { activeIndex } = this.state
     const nextItemObj = this.getNextItemObj()
     const prevItemObj = this.convertChildToCbObj(activeIndex)
     onNextStart(prevItemObj, nextItemObj)
-    this.slideNext(options)
+    this.slideNext(options, 'onNextStart')
   }
 
   onPrevStart = (options) => {
@@ -585,36 +593,43 @@ class Carousel extends React.Component {
     const nextItemObj = this.getNextItemObj(true)
     const prevItemObj = this.convertChildToCbObj(activeIndex)
     onPrevStart(prevItemObj, nextItemObj)
-    this.slidePrev(options)
+    this.slidePrev(options, 'onPrevStart')
   }
 
-  slideNext = (options = {}) => {
+  slideNext = (options = {}, deOnde) => {
     const { skipTilt } = options
+    //console.log('slideNext', { skipTilt, name })
     const { enableTilt } = this.getDerivedPropsFromBreakPoint()
     const { activeIndex, sliderPosition } = this.state
     const nextItem = this.getNextItemIndex(activeIndex, false)
     if (activeIndex !== nextItem) {
-      this.goTo(nextItem)
+      this.goTo(nextItem, deOnde ? deOnde : 'slideNext')
     } else if (enableTilt && !skipTilt) {
       this.tiltMovement(sliderPosition, 20, 150)
     }
   }
 
-  slidePrev = (options = {}) => {
+  slidePrev = (options = {}, deOnde) => {
     const { skipTilt } = options
     const { activeIndex } = this.state
     const { enableTilt } = this.getDerivedPropsFromBreakPoint()
     const prevItem = this.getNextItemIndex(activeIndex, true)
     if (activeIndex !== prevItem) {
-      this.goTo(prevItem)
+      this.goTo(prevItem, deOnde ? deOnde : 'slidePrev')
     } else if (enableTilt && !skipTilt) {
       this.tiltMovement(0, -20, 150)
     }
   }
 
   onNextEnd = () => {
-    const { onNextEnd, onChange } = this.getDerivedPropsFromBreakPoint()
+    // if (this.isHoverActive) {
+    //   return
+    // }
     const { activeIndex, activePage } = this.state
+
+    console.log('onNextEnd', this.isHoverActive)
+
+    const { onNextEnd, onChange } = this.getDerivedPropsFromBreakPoint()
     const nextItemObj = this.convertChildToCbObj(activeIndex)
     this.removeSliderTransitionHook(this.onNextEnd)
     this.setState({ transitioning: false })
@@ -623,8 +638,14 @@ class Carousel extends React.Component {
   }
 
   onPrevEnd = () => {
+    // if (this.isHoverActive) {
+    //   return
+    // }
+
     const { onPrevEnd, onChange } = this.getDerivedPropsFromBreakPoint()
     const { activeIndex, activePage } = this.state
+    console.log('onPrevEnd', this.isHoverActive, activePage)
+
     const nextItemObj = this.convertChildToCbObj(activeIndex)
     this.removeSliderTransitionHook(this.onPrevEnd)
     this.setState({ transitioning: false })
@@ -633,10 +654,20 @@ class Carousel extends React.Component {
   }
 
   generatePositionUpdater =
-    (direction, nextItemId, verticalMode, rest) => (state) => {
+    (direction, nextItemId, verticalMode, isActionBlock, rest) => (state) => {
       const { sliderPosition, childHeight, activeIndex } = state
-      const childWidth = this.calculateChildWidth()
 
+      console.log('SL-POSITION: generatePositionUpdater', {
+        sliderPosition,
+        childHeight,
+        activeIndex,
+      })
+
+      if (isActionBlock) {
+        return
+      }
+
+      const childWidth = this.calculateChildWidth()
       let newSliderPosition = 0
       const childSize = verticalMode ? childHeight : childWidth
       if (direction === consts.NEXT) {
@@ -656,13 +687,16 @@ class Carousel extends React.Component {
       }
     }
 
-  goTo = (nextItemId) => {
+  goTo = (nextItemId, deOnde) => {
+    console.log('GOTO....:', { nextItemId, deOnde })
+    this.nextTempItemId = nextItemId
+
     const { children, verticalMode, itemsToShow } =
       this.getDerivedPropsFromBreakPoint()
     const { activeIndex } = this.state
     const childrenLength = Children.toArray(children).length
     let safeNextItemId = Math.max(0, nextItemId) // don't allow negative numbers
-    const isPrev = activeIndex > safeNextItemId
+    const isPrev = activeIndex > safeNextItemId // if we are going back
     const nextAvailableItem = this.getNextItemIndex(activeIndex, isPrev)
     const noChange = nextAvailableItem === activeIndex
     const outOfBoundary = safeNextItemId + itemsToShow >= childrenLength
@@ -673,20 +707,51 @@ class Carousel extends React.Component {
       // Either go to last index (respect itemsToShow) or 0 index if we can't fill the slider
       safeNextItemId = Math.max(0, childrenLength - itemsToShow)
     }
+
+    let isActionBlock = false
+    if (this.isHoverActive) {
+      // if we are hovering over the carousel, we don't want to slide
+      isActionBlock = true
+      if (
+        deOnde === 'onNextStart' ||
+        deOnde === 'onPrevStart' ||
+        deOnde === 'swipedRight' ||
+        deOnde === 'swipedLeft' ||
+        deOnde === 'onIndicatorClick'
+      ) {
+        isActionBlock = false
+      }
+
+      if (nextItemId === 0) {
+        isActionBlock = true
+        if (
+          deOnde === 'onIndicatorClick' ||
+          deOnde === 'onPrevStart' ||
+          deOnde === 'swipedRight'
+        ) {
+          isActionBlock = false
+        }
+      }
+    }
+
     let direction = consts.NEXT
     let positionEndCb = this.onNextEnd
+
     if (isPrev) {
       direction = consts.PREV
       positionEndCb = this.onPrevEnd
     }
+
     const stateUpdater = this.generatePositionUpdater(
       direction,
       safeNextItemId,
       verticalMode,
+      isActionBlock,
       {
         transitioning: true,
       }
     )
+
     this.setState(stateUpdater, () => {
       // callback
       pipe(this.updateActivePage(), this.onSliderTransitionEnd(positionEndCb))
@@ -702,6 +767,8 @@ class Carousel extends React.Component {
   }
 
   updateActivePage = () => {
+    console.log('UPDATE ACTIVE PAGE updateActivePage:')
+
     this.setState((state) => {
       const { itemsToShow, children } = this.getDerivedPropsFromBreakPoint()
       const { activeIndex, activePage } = state
@@ -722,22 +789,39 @@ class Carousel extends React.Component {
     const { itemsToShow } = this.getDerivedPropsFromBreakPoint()
     const gotoIndex = indicatorId * itemsToShow
     this.setState({ activePage: indicatorId })
-    this.goTo(gotoIndex)
+    this.goTo(gotoIndex, 'onIndicatorClick')
   }
 
   onMouseEnter = () => {
-    const { enableAutoPlay } = this.props
-    if (enableAutoPlay) {
-      console.log('removing autoplay')
-      this.removeAutoPlay()
+    const { enableAutoPlay } = this.getDerivedPropsFromBreakPoint()
+    if (!enableAutoPlay) {
+      return
     }
+
+    this.isHoverActive = true
   }
 
   onMouseLeave = () => {
-    const { enableAutoPlay } = this.props
-    if (enableAutoPlay) {
-      console.log('adding autoplay')
-      this.setAutoPlay()
+    const { itemsToShow, enableAutoPlay } = this.getDerivedPropsFromBreakPoint()
+
+    if (!enableAutoPlay) {
+      return
+    }
+
+    this.isHoverActive = false
+
+    const { activeIndex } = this.state
+    console.log('onMouseLeave', this.state, this.nextTempItemId)
+
+    //Fix for the carousel not sliding when the mouse leaves from the latest item
+    if (this.nextTempItemId === 0) {
+      this.removeAutoPlay()
+      this.goTo(0, 'slideNext')
+    }
+
+    //Fix the first item not sliding
+    if (activeIndex === 0 && itemsToShow === 1 && !this.nextTempItemId) {
+      this.goTo(1, 'slideNext')
     }
   }
 
@@ -796,7 +880,7 @@ class Carousel extends React.Component {
       _itemHeight = `${itemHeight}px`
     }
 
-    console.log('rendering carousel', rootHeight, this.isComponentMounted)
+    //console.log('rendering carousel', rootHeight, this.isComponentMounted)
 
     return (
       <>
@@ -836,6 +920,7 @@ class Carousel extends React.Component {
                   onClick={this.onPrevStart}
                   direction={verticalMode ? Arrow.up : Arrow.left}
                   disabled={disabledPrevArrow}
+                  name="btn-prev"
                 />
               )}
             </Only>
@@ -893,6 +978,7 @@ class Carousel extends React.Component {
                   onClick={this.onNextStart}
                   direction={verticalMode ? Arrow.down : Arrow.right}
                   disabled={disabledNextArrow}
+                  name="btn-next"
                 />
               )}
             </Only>
