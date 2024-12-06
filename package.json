@@ -26,7 +26,8 @@
     "lint": "next lint",
     "build:demo": "next build",
     "build:carousel": "rollup -c",
-    "test": "jest --watch --passWithNoTests --detectOpenHandles"
+    "test": "jest",
+    "test:watch": "jest --watch --passWithNoTests --detectOpenHandles"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.5",
@@ -80,6 +81,7 @@
     "sass": "^1.81.0",
     "sass-loader": "^16.0.3",
     "styled-components": "^6.1.13",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   },
   "files": [
