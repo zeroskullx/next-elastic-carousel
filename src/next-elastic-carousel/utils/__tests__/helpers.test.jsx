@@ -1,6 +1,11 @@
 import * as helpers from "../helpers";
 
 describe("helpers", () => {
+
+  it("noop", () => {
+    expect(helpers.noop()).toEqual(undefined);
+  });
+
   it("numberToArray", () => {
     const length = 5;
     const arr = helpers.numberToArray(length);

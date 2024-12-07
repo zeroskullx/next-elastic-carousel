@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import Pagination from '../Pagination/Pagination'
+import Pagination from '../Pagination'
 
 describe('Pagination Component', () => {
   const numOfPages = 5
