@@ -7,22 +7,24 @@ import { cssPrefix } from '../../utils/helpers'
 const boxShadow = '0 0 1px 2px rgba(0, 0, 0, 0.5)'
 const activeBoxShadow = '0 0 1px 3px rgba(103,58,183,1)'
 const hoveredBoxShadow = '0 0 1px 3px rgba(103,58,183,.5)'
+const activeBackground = 'rgba(103,58,183,.5)'
 
 const Dot = styled.button`
-  box-sizing: border-box;
   padding: 0;
-  transition: all 250ms ease;
   border: none;
   margin: 5px;
   background-color: ${({ active }) =>
-    active ? 'rgba(103,58,183,.5)' : 'transparent'};
-  font-size: 1.3em;
-  content: '';
+    active ? activeBackground : 'transparent'};
+  //font-size: 1.3em;
   height: 10px;
   width: 10px;
-  box-shadow: ${({ active }) => (active ? activeBoxShadow : boxShadow)};
   border-radius: 50%;
+  box-sizing: border-box;
   outline: none;
+  //content: '';
+
+  transition: all 250ms ease-in-out;
+  box-shadow: ${({ active }) => (active ? activeBoxShadow : boxShadow)};
   &:hover,
   &:focus {
     cursor: pointer;
