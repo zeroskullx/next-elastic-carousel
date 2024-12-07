@@ -1,28 +1,36 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 
+const primaryColor = 'rgba(103, 58, 183, 1)'
+const disabledColor = 'rgba(103, 58, 183, .1)'
+const backgroundColor = 'rgba(103, 58, 183, 0.1)'
+const boxShadowColor = 'rgba(103, 58, 183, 0.8)'
+const hoverBoxShadowColor = 'rgba(103, 58, 183, 1)'
+
 export default styled.button`
-  box-sizing: border-box;
-  transition: all 0.175s ease;
-  font-size: 1.6em;
-  background-color: rgba(103, 58, 183, 0.1);
-  color: ${(props) => (props.disabled ? '#999' : '#333')};
-  box-shadow: 0 0 2px 0px #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  color: ${(props) => (props.disabled ? disabledColor : primaryColor)};
   border-radius: 50%;
   border: none;
   padding: 0;
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
-  line-height: 50px;
-  align-self: center;
-  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
   outline: none;
+  box-sizing: border-box;
+
+  transition: all 0.175s ease;
+  cursor: pointer;
+  box-shadow: 0 0 3px 0px ${boxShadowColor};
+  background-color: ${backgroundColor};
   &:hover:enabled,
   &:focus:enabled {
     color: #fff;
-    background-color: rgba(103, 58, 183, 1);
-    box-shadow: 0 0 2px 0 #333;
+    background-color: ${primaryColor};
+    box-shadow: 0 0 6px 0 ${hoverBoxShadowColor};
   }
   &:disabled {
     cursor: not-allowed;
