@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-const CarouselWrapperDiv = styled.div`
+const CarouselWrapperContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,4 +10,4 @@ const CarouselWrapperDiv = styled.div`
   overflow: ${(props) => props.overflow};
 `
 
-export default CarouselWrapperDiv
+export default CarouselWrapperContainer

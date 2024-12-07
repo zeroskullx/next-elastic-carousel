@@ -1,22 +1,39 @@
-import styled, { StyleSheetManager } from 'styled-components'
+/** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { cssPrefix } from '../../utils/helpers'
 import consts from '../../constants'
 
-const ItemWrapper = styled.div.attrs(({ style }) => ({
-  style,
-  className: cssPrefix('item-wrapper'),
-}))`
-  box-sizing: border-box;
-  display: flex;
-  overflow: hidden;
-  user-select: none;
-  justify-content: ${({ itemposition }) => itemposition};
-`
+const ItemWrapperContent = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'itemposition',
+})(({ itemposition, style }) => ({
+  boxSizing: 'border-box',
+  display: 'flex',
+  overflow: 'hidden',
+  userSelect: 'none',
+  justifyContent: itemposition,
+  ...style, // Adiciona estilos dinamicamente
+}))
 
-ItemWrapper.defaultProps = {
-  style: {},
-  itemposition: consts.CENTER,
+function ItemWrapper({
+  itemPosition = consts.START,
+  children,
+  style = {},
+  idx,
+  onItemClick,
+}) {
+  return (
+    <ItemWrapperContent
+      id={idx}
+      key={idx}
+      style={style}
+      className={cssPrefix('item-wrapper')}
+      itemposition={itemPosition}
+      onClick={onItemClick}
+    >
+      {children}
+    </ItemWrapperContent>
+  )
 }
 
 ItemWrapper.propTypes = {
@@ -25,24 +42,4 @@ ItemWrapper.propTypes = {
   itemPosition: PropTypes.oneOf([consts.START, consts.CENTER, consts.END]),
 }
 
-export default function ItemWrapperContainer({
-  itemPosition,
-  children,
-  style,
-  idx,
-  onItemClick,
-}) {
-  return (
-    <StyleSheetManager shouldForwardProp={(prop) => prop !== 'itemPosition'}>
-      <ItemWrapper
-        id={idx}
-        itemPosition={itemPosition}
-        style={style}
-        key={idx}
-        onClick={onItemClick}
-      >
-        {children}
-      </ItemWrapper>
-    </StyleSheetManager>
-  )
-}
+export default ItemWrapper

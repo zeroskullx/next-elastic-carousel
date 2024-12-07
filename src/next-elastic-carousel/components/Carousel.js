@@ -1,8 +1,6 @@
 import React, { Children } from 'react'
 import PropTypes from 'prop-types'
 import ResizeObserver from 'resize-observer-polyfill'
-import isPropValid from '@emotion/is-prop-valid'
-import { StyleSheetManager } from 'styled-components'
 
 import Only from './OnlyWhen'
 import Track from './Track'
@@ -182,7 +180,7 @@ class Carousel extends React.Component {
         .find((bp) => bp.width <= sliderContainerWidth)
       if (!currentBreakPoint) {
         /* in case we don't have a lower width than sliderContainerWidth
-         * this mostly happens in initilization when sliderContainerWidth is 0
+         * this mostly happens in initialization when sliderContainerWidth is 0
          */
         currentBreakPoint = breakPoints[0]
       }
@@ -966,42 +964,38 @@ class Carousel extends React.Component {
               ref={this.setRef('sliderContainer')}
               size={{ height: _itemHeight }}
             >
-              <StyleSheetManager
-                shouldForwardProp={(prop) => isPropValid(prop)}
+              <Slider
+                verticalMode={verticalMode}
+                isRTL={isRTL}
+                easing={easing}
+                sliderPosition={sliderPosition}
+                swipedSliderPosition={swipedSliderPosition}
+                isSwiping={isSwiping}
+                transitionMs={transitionMs}
+                tiltEasing={tiltEasing}
+                className={cssPrefix('slider')}
+                ref={this.setRef('slider')}
+                outerSpacing={outerSpacing}
               >
-                <Slider
+                <Track
                   verticalMode={verticalMode}
-                  isRTL={isRTL}
-                  easing={easing}
-                  sliderPosition={sliderPosition}
-                  swipedSliderPosition={swipedSliderPosition}
-                  isSwiping={isSwiping}
-                  transitionMs={transitionMs}
-                  tiltEasing={tiltEasing}
-                  className={cssPrefix('slider')}
-                  ref={this.setRef('slider')}
-                  outerSpacing={outerSpacing}
+                  childWidth={childWidth}
+                  currentItem={activeIndex}
+                  autoTabIndexVisibleItems={autoTabIndexVisibleItems}
+                  itemsToShow={itemsToShow}
+                  itemsToScroll={itemsToScroll}
+                  itemPosition={itemPosition}
+                  itemPadding={itemPadding}
+                  enableSwipe={enableSwipe}
+                  enableMouseSwipe={enableMouseSwipe}
+                  preventDefaultTouchmoveEvent={preventDefaultTouchmoveEvent}
+                  onSwiped={this.onSwiped}
+                  onSwiping={this.onSwiping}
+                  onItemClick={focusOnSelect ? this.goTo : undefined}
                 >
-                  <Track
-                    verticalMode={verticalMode}
-                    childWidth={childWidth}
-                    currentItem={activeIndex}
-                    autoTabIndexVisibleItems={autoTabIndexVisibleItems}
-                    itemsToShow={itemsToShow}
-                    itemsToScroll={itemsToScroll}
-                    itemPosition={itemPosition}
-                    itemPadding={itemPadding}
-                    enableSwipe={enableSwipe}
-                    enableMouseSwipe={enableMouseSwipe}
-                    preventDefaultTouchmoveEvent={preventDefaultTouchmoveEvent}
-                    onSwiped={this.onSwiped}
-                    onSwiping={this.onSwiping}
-                    onItemClick={focusOnSelect ? this.goTo : undefined}
-                  >
-                    {Children.toArray(children)}
-                  </Track>
-                </Slider>
-              </StyleSheetManager>
+                  {Children.toArray(children)}
+                </Track>
+              </Slider>
             </SliderContainer>
             <Only when={showArrows}>
               {renderArrow ? (

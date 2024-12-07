@@ -1,6 +1,7 @@
-import styled from 'styled-components'
+/** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled'
 
-export default styled.button.attrs(({ type = 'button' }) => ({ type }))`
+export default styled.button`
   box-sizing: border-box;
   transition: all 0.175s ease;
   font-size: 1.6em;

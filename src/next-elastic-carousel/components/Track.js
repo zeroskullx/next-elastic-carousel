@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSwipeable } from 'react-swipeable'
+
 import { cssPrefix } from '../utils/helpers'
 import ItemWrapperContainer from './ItemWrapperContainer'
 
@@ -39,6 +40,7 @@ const Track = ({
           tabIndex: isVisible ? 0 : -1,
         })
       : child
+
     return (
       <div
         className={cssPrefix(
@@ -68,7 +70,7 @@ const Track = ({
     trackMouse: enableMouseSwipe,
     onSwiped: onSwiped,
     onSwiping: onSwiping,
-    className: cssPrefix('swipable'),
+    //className: cssPrefix('swipable'),
 
     enableMouseSwipe: enableMouseSwipe,
     enableSwipe: enableSwipe,
@@ -76,6 +78,7 @@ const Track = ({
 
   const toRender = enableSwipe ? (
     <div
+      className={cssPrefix('swipable')}
       style={{
         display: 'flex',
         flexDirection: verticalMode ? 'column' : 'row',
