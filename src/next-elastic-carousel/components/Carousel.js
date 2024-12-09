@@ -1186,7 +1186,9 @@ Carousel.propTypes = {
   /** Position the element relative to it's wrapper (use the consts object) - consts.START | consts.CENTER | consts.END */
   itemPosition: PropTypes.oneOf([consts.START, consts.CENTER, consts.END]),
 
-  /** A margin at the beginning and at the end of the carousel (not compatible with verticalMode yet !) */
+  /** A margin at the beginning and at the end of the carousel (not compatible with verticalMode yet !)
+   * @deprecated Use `slideSpacing` instead.
+   */
   outerSpacing: PropTypes.number,
 
   // swipe

@@ -82,6 +82,7 @@ export interface NextElasticCarouselProps {
   // Defaults to "CENTER"
   itemPosition?: 'START' | 'CENTER' | 'END'
   // A margin at the beginning and at the end of the carousel - Defaults to 0 (not compatible with verticalMode yet !)
+  /** @deprecated Use `slideSpacing` instead. */
   outerSpacing?: number
   // Enable or disable swipe - Defaults to true
   enableSwipe?: boolean
