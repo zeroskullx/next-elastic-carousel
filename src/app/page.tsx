@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 
 import styles from './page.module.scss'
-import NextElasticCarousel from '@/next-elastic-carousel'
+import NextElasticCarousel from 'next-elastic-carousel'
 
 export default function Home() {
   const carouselRef = useRef<any>(null)
@@ -45,10 +45,14 @@ export default function Home() {
             <div className={styles.carousel_container}>
               <div className={styles.live_preview}>
                 <NextElasticCarousel
+                  //isRTL
                   renderLoading={<Loading />}
                   itemHeight={280}
                   ref={carouselRef}
-                  className={'carousel-custom'}
+                  //className={'carousel-custom'}
+                  //verticalMode={true}
+                  slideSpacing={16}
+                  arrowsInside={true}
                   showArrows={true}
                   pagination={true}
                   itemsToShow={1}
