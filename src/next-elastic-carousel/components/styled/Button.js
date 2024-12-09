@@ -2,10 +2,13 @@
 import styled from '@emotion/styled'
 
 const primaryColor = 'rgba(103, 58, 183, 1)'
-const disabledColor = 'rgba(103, 58, 183, .1)'
-const backgroundColor = 'rgba(103, 58, 183, 0.1)'
+const backgroundColor = '#fdfdfd'
 const boxShadowColor = 'rgba(103, 58, 183, 0.8)'
-const hoverBoxShadowColor = 'rgba(103, 58, 183, 1)'
+const hoverBoxShadowColor = 'rgb(190 153 255)'
+
+const disabledColor = 'rgba(103, 58, 183, .58)'
+const disabledBackgroundColor = 'rgba(247, 247, 247, .48)'
+const disabledBoxShadowColor = '#ebebeb'
 
 export default styled.button`
   display: flex;
@@ -34,5 +37,7 @@ export default styled.button`
   }
   &:disabled {
     cursor: not-allowed;
+    background-color: ${disabledBackgroundColor};
+    box-shadow: 0 0 3px 0 ${disabledBoxShadowColor};
   }
 `

@@ -29,7 +29,7 @@ describe('Carousel - public API (props)', () => {
     const { container } = render(<Carousel>{Items[0]}</Carousel>)
 
     // Encontrando o botão "next" usando a classe "rec-arrow-right"
-    const nextButton = container.querySelector('button.rec-arrow-right')
+    const nextButton = container.querySelector('button.rec-arrow-button-right')
 
     // Verifique se o botão foi encontrado
     expect(nextButton).toBeInTheDocument()

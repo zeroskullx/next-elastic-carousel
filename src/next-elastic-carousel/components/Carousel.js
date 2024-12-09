@@ -226,7 +226,7 @@ class Carousel extends React.Component {
       return
     }
 
-    const { verticalMode, children, itemsToShow } =
+    const { verticalMode, children, itemsToShow, slideSpacing } =
       this.getDerivedPropsFromBreakPoint()
     const { height: sliderHeight } = sliderNode.contentRect
     const nextState = {}
@@ -236,7 +236,8 @@ class Carousel extends React.Component {
       // We use Math.min because we don't want to make the child smaller
       // if the number of children is smaller than itemsToShow.
       // (Because we do not want "empty slots")
-      nextState.rootHeight = childHeight * Math.min(childrenLength, itemsToShow)
+      nextState.rootHeight =
+        childHeight * Math.min(childrenLength, itemsToShow) - slideSpacing
       nextState.childHeight = childHeight
     } else {
       nextState.rootHeight = sliderHeight
@@ -246,8 +247,13 @@ class Carousel extends React.Component {
 
   calculateChildWidth = () => {
     const { sliderContainerWidth } = this.state
-    const { verticalMode, itemsToShow, showEmptySlots, children } =
-      this.getDerivedPropsFromBreakPoint()
+    const {
+      verticalMode,
+      itemsToShow,
+      showEmptySlots,
+      children,
+      slideSpacing,
+    } = this.getDerivedPropsFromBreakPoint()
 
     /* based on slider container's width, get num of items to show
      * and calculate child's width (and update it in state)
@@ -265,7 +271,20 @@ class Carousel extends React.Component {
       childWidth =
         sliderContainerWidth /
         (showEmptySlots ? itemsToShow : Math.min(childrenLength, itemsToShow))
+
+      //if (itemsToShow > 1) childWidth = childWidth - slideSpacing / itemsToShow
+
+      if (itemsToShow > 1) {
+        let x = itemsToShow - 1
+        let y = x * slideSpacing
+        let z = sliderContainerWidth - y
+
+        childWidth = z / itemsToShow
+      }
+
+      //console.log('childWidthXXXX', sliderContainerWidth, childWidth)
     }
+
     return childWidth
   }
 
@@ -884,7 +903,8 @@ class Carousel extends React.Component {
       focusOnSelect,
       autoTabIndexVisibleItems,
       itemPosition,
-      itemPadding,
+      //itemPadding,
+      slideSpacing,
       outerSpacing,
       enableSwipe,
       enableMouseSwipe,
@@ -896,6 +916,7 @@ class Carousel extends React.Component {
       renderPagination,
       renderLoading,
       itemHeight,
+      arrowsInside,
     } = this.getDerivedPropsFromBreakPoint()
 
     const childWidth = this.calculateChildWidth()
@@ -910,17 +931,16 @@ class Carousel extends React.Component {
     const disabledPrevArrow = !canSlidePrev && disableArrowsOnEnd
     const disabledNextArrow = !canSlideNext && disableArrowsOnEnd
 
-    let _itemHeight = itemHeight
-    if (typeof itemHeight === 'number') {
-      _itemHeight = `${itemHeight}px`
-    }
-
     //console.log('rendering carousel', rootHeight, this.isComponentMounted)
 
     return (
       <>
         {!this.isComponentMounted && (
-          <Loading size={{ height: _itemHeight }}>
+          <Loading
+            size={{ height: itemHeight }}
+            itemsToShow={itemsToShow}
+            verticalMode={verticalMode}
+          >
             {renderLoading ? renderLoading : 'Loading...'}
           </Loading>
         )}
@@ -956,13 +976,17 @@ class Carousel extends React.Component {
                   direction={verticalMode ? Arrow.up : Arrow.left}
                   disabled={disabledPrevArrow}
                   name="btn-prev"
+                  itemHeight={this.isComponentMounted ? rootHeight : itemHeight}
+                  arrowsInside={arrowsInside}
                 />
               )}
             </Only>
             <SliderContainer
+              verticalMode={verticalMode}
               className={cssPrefix('slider-container')}
               ref={this.setRef('sliderContainer')}
-              size={{ height: _itemHeight }}
+              size={{ height: itemHeight }}
+              arrowsInside={arrowsInside}
             >
               <Slider
                 verticalMode={verticalMode}
@@ -976,6 +1000,9 @@ class Carousel extends React.Component {
                 className={cssPrefix('slider')}
                 ref={this.setRef('slider')}
                 outerSpacing={outerSpacing}
+                activePage={activePage}
+                slideSpacing={slideSpacing}
+                currentItem={activeIndex}
               >
                 <Track
                   verticalMode={verticalMode}
@@ -985,7 +1012,7 @@ class Carousel extends React.Component {
                   itemsToShow={itemsToShow}
                   itemsToScroll={itemsToScroll}
                   itemPosition={itemPosition}
-                  itemPadding={itemPadding}
+                  slideSpacing={slideSpacing}
                   enableSwipe={enableSwipe}
                   enableMouseSwipe={enableMouseSwipe}
                   preventDefaultTouchmoveEvent={preventDefaultTouchmoveEvent}
@@ -1010,6 +1037,8 @@ class Carousel extends React.Component {
                   direction={verticalMode ? Arrow.down : Arrow.right}
                   disabled={disabledNextArrow}
                   name="btn-next"
+                  itemHeight={this.isComponentMounted ? rootHeight : itemHeight}
+                  arrowsInside={arrowsInside}
                 />
               )}
             </Only>
@@ -1050,7 +1079,7 @@ Carousel.defaultProps = {
   pagination: true,
   easing: 'ease',
   tiltEasing: 'ease',
-  transitionMs: 500,
+  transitionMs: 400,
   enableTilt: true,
   enableSwipe: true,
   enableMouseSwipe: true,
@@ -1060,11 +1089,15 @@ Carousel.defaultProps = {
   itemsToShow: 1,
   itemsToScroll: 1,
   itemPosition: consts.CENTER,
-  itemPadding: [0, 0, 0, 0],
+  //itemPadding: [0, 0, 0, 0],
   outerSpacing: 0,
   enableAutoPlay: false,
   autoPlaySpeed: 2000,
   enableNextEndBack: true,
+  //News
+  arrowsInside: false,
+  slideSpacing: 0,
+  itemHeight: 280,
 
   // callbacks
   onChange: noop,
@@ -1161,9 +1194,9 @@ Carousel.propTypes = {
   itemPosition: PropTypes.oneOf([consts.START, consts.CENTER, consts.END]),
 
   /** A padding for each element  */
-  itemPadding: PropTypes.array,
+  //itemPadding: PropTypes.array,
 
-  itemHeight: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+  itemHeight: PropTypes.number.isRequired,
 
   /** A margin at the beginning and at the end of the carousel (not compatible with verticalMode yet !) */
   outerSpacing: PropTypes.number,
@@ -1215,6 +1248,12 @@ Carousel.propTypes = {
   /** A callback for the "slider-container" resize
    * - onResize(currentBreakPoint) => {} */
   onResize: PropTypes.func,
+
+  /** New: Renders the arrows inside or outside the carousel */
+  arrowsInside: PropTypes.bool,
+
+  /** New: Adds spacing between slides */
+  slideSpacing: PropTypes.number,
 }
 
 export default Carousel

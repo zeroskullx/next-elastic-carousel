@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 
 export default styled.div`
@@ -6,5 +7,8 @@ export default styled.div`
   padding: 1rem;
   justify-content: center;
   align-items: center;
-  height: ${(props) => props.size?.height};
+  height: ${(props) =>
+    props.verticalMode
+      ? props.itemsToShow * props.size?.height
+      : props.size?.height}px;
 `

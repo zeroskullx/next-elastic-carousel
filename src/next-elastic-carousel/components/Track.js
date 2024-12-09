@@ -16,14 +16,14 @@ const Track = ({
   itemsToScroll,
   currentItem,
   itemPosition,
-  itemPadding,
+  slideSpacing,
   onSwiped,
   onSwiping,
   verticalMode,
   onItemClick,
 }) => {
   const width = `${childWidth}px`
-  const paddingStyle = `${itemPadding?.join('px ')}px`
+  //const paddingStyle = '' //`${itemPadding?.join('px ')}px`
   const minVisibleItem = currentItem
   const maxVisibleItem = currentItem + itemsToShow
   const prevItem = minVisibleItem - itemsToScroll
@@ -50,11 +50,16 @@ const Track = ({
           isPrevItem && `${itemClass}-prev`,
           isNextItem && `${itemClass}-next`
         )}
+        //Aqui é onde o padding é aplicado
+        style={{
+          paddingLeft: verticalMode ? '' : `${slideSpacing}px`,
+          paddingTop: verticalMode ? `${slideSpacing}px` : '',
+        }}
       >
         <ItemWrapperContainer
           id={idx}
           itemPosition={itemPosition}
-          style={{ width, padding: paddingStyle }}
+          style={{ width }}
           key={idx}
           onClick={onItemClick}
         >
@@ -99,7 +104,6 @@ Track.propTypes = {
   noAutoTabbedItems: PropTypes.bool,
   currentItem: PropTypes.number.isRequired,
   itemPosition: PropTypes.string,
-  itemPadding: PropTypes.array,
   childWidth: PropTypes.number,
   verticalMode: PropTypes.bool,
   enableSwipe: PropTypes.bool,
@@ -108,6 +112,7 @@ Track.propTypes = {
   onSwiped: PropTypes.func,
   onSwiping: PropTypes.func,
   onItemClick: PropTypes.func,
+  slideSpacing: PropTypes.number,
 }
 
 export default Track

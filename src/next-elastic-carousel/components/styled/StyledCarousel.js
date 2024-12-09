@@ -1,20 +1,9 @@
-// import styled from '@emotion/styled'
-
-// export default styled.div.attrs((props) => ({
-//   style: {
-//     height: props.size.height,
-//     opacity: props.opacity,
-//   },
-// }))`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-// `
-
+/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 
 // Define o componente com props dinâmicos no estilo
 const StyledCarousel = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   width: ${(props) => props.size?.width};

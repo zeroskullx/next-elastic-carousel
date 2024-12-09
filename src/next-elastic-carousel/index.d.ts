@@ -35,6 +35,12 @@ export interface NextElasticCarouselProps {
 
   itemHeight?: number | string
 
+  // Defaults to 0
+  slideSpacing?: number
+
+  // Defaults to false
+  arrowsInside?: boolean
+
   className?: string
   // Defaults to 1
   itemsToShow?: number
@@ -44,7 +50,7 @@ export interface NextElasticCarouselProps {
   isRTL?: boolean
   // Defaults to true
   pagination?: boolean
-  // Defaults to 500
+  // Defaults to 400
   transitionMs?: number
   // Defaults to "ease"
   easing?: string
@@ -79,7 +85,7 @@ export interface NextElasticCarouselProps {
   // Defaults to "CENTER"
   itemPosition?: 'START' | 'CENTER' | 'END'
   // A padding for each element - Defaults to [0,0,0,0]
-  itemPadding?: number[]
+  //itemPadding?: number[]
   // A margin at the beginning and at the end of the carousel - Defaults to 0 (not compatible with verticalMode yet !)
   outerSpacing?: number
   // Enable or disable swipe - Defaults to true

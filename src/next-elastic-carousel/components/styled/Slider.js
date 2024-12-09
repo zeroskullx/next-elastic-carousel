@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import styled from '@emotion/styled'
 
 import * as React from 'react'
-import styled from '@emotion/styled'
 
 const calcLeft = ({
   isRTL,
@@ -50,33 +50,29 @@ const calcTransition = ({ isSwiping, transitionMs, easing, tiltEasing }) => {
   return `all ${duration}ms ${effectiveEasing}`
 }
 
-// We use attributes (style) to bypass multiple creation of classes (dynamic styling)
-// export default styled.div.attrs(props => ({
-//   style: {
-//     transition: calcTransition(props),
-//     left: calcLeft(props),
-//     right: calcRight(props),
-//     top: calcTop(props)
-//   }
-// }))`
-//   position: absolute;
-//   display: flex;
-//   flex-direction: ${({ verticalMode }) => (verticalMode ? "column" : "row")};
-//   ${({ verticalMode }) => (verticalMode ? "min-height: 100%;" : "")};
-//   ${({ verticalMode, outerSpacing }) =>
-//     verticalMode ? "" : `margin: 0 ${outerSpacing}px;`};
-// `;
+const calcSlideSpacing = ({ slideSpacing, currentItem, verticalMode }) => {
+  if (verticalMode) {
+    return slideSpacing
+  }
+  return slideSpacing * currentItem + slideSpacing
+}
 
 const SliderContainer = styled.div((props) => ({
   position: 'absolute',
   display: 'flex',
   flexDirection: props.verticalMode ? 'column' : 'row',
   minHeight: props.verticalMode ? '100%' : '',
-  margin: props.verticalMode ? '' : `0 ${props.outerSpacing}px`,
 }))
 
 const Slider = React.forwardRef((props, ref) => {
-  const { children, ...rest } = props
+  const { children, slideSpacing, activePage, verticalMode, ...rest } = props
+
+  const _activePage = calcSlideSpacing({
+    verticalMode,
+    slideSpacing,
+    currentItem: props.currentItem,
+  })
+
   return (
     <SliderContainer
       ref={ref}
@@ -85,7 +81,10 @@ const Slider = React.forwardRef((props, ref) => {
         left: calcLeft(props),
         right: calcRight(props),
         top: calcTop(props),
+        marginLeft: verticalMode ? '' : `-${_activePage}px`,
+        marginTop: verticalMode ? `-${_activePage}px` : '',
       }}
+      verticalMode={verticalMode}
       {...rest}
     >
       {children}

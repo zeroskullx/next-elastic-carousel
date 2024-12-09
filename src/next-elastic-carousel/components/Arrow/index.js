@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
+
 import { cssPrefix } from '../../utils/helpers'
 import { Button } from '../styled'
 import { LeftIcon } from './Left.icon'
 import { RightIcon } from './Right.icon'
+import ArrowWrapper from './ArrowWrapper'
 
 const directionIcons = {
   left: <LeftIcon />,
@@ -13,7 +14,7 @@ const directionIcons = {
   down: <RightIcon />,
 }
 
-const arrowClassname = cssPrefix('arrow')
+const arrowClassname = 'arrow'
 
 const rotateStyle = (direction) => {
   let rotate = {}
@@ -22,7 +23,15 @@ const rotateStyle = (direction) => {
   }
   return rotate
 }
-const Arrow = ({ direction, onClick, icons, style, ...rest }) => {
+const Arrow = ({
+  direction,
+  onClick,
+  icons,
+  style,
+  itemHeight,
+  arrowsInside,
+  ...rest
+}) => {
   const arrows = { ...directionIcons, ...icons }
   const styleObj = {
     ...rotateStyle(direction),
@@ -30,15 +39,22 @@ const Arrow = ({ direction, onClick, icons, style, ...rest }) => {
   }
 
   return (
-    <Button
-      tabIndex={0}
-      onClick={onClick}
-      className={cx(arrowClassname, `${arrowClassname}-${direction}`)}
-      style={styleObj}
-      {...rest}
+    <ArrowWrapper
+      className={cssPrefix('arrow', `${arrowClassname}-${direction}`)}
+      direction={direction}
+      itemHight={itemHeight}
+      arrowsInside={arrowsInside}
     >
-      {arrows[direction]}
-    </Button>
+      <Button
+        tabIndex={0}
+        onClick={onClick}
+        className={cssPrefix(`${arrowClassname}-button-${direction}`)}
+        style={styleObj}
+        {...rest}
+      >
+        {arrows[direction]}
+      </Button>
+    </ArrowWrapper>
   )
 }
 
@@ -52,6 +68,8 @@ Arrow.propTypes = {
   icons: PropTypes.object,
   style: PropTypes.object,
   onClick: PropTypes.func,
+  itemHeight: PropTypes.number,
+  arrowsInside: PropTypes.bool,
 }
 
 export default Arrow
