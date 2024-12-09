@@ -118,6 +118,8 @@ describe('Carousel - public CSS classnames', () => {
     'carousel-item-next',
     'item-wrapper',
     'arrow',
+    'arrow-button-right',
+    'arrow-button-left',
     'swipable',
     //'dot',
     //'dot_active',
