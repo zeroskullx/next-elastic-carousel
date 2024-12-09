@@ -665,7 +665,7 @@ class Carousel extends React.Component {
 
     this.clearTimeOutId()
 
-    console.log('onNextEnd', activePage, pages.length, this.timeOutId)
+    //console.log('onNextEnd', activePage, pages.length, this.timeOutId)
 
     if (itemsToShow > 1) {
       if (activePage === pages.length - 1) {
@@ -1092,7 +1092,7 @@ Carousel.defaultProps = {
   //itemPadding: [0, 0, 0, 0],
   outerSpacing: 0,
   enableAutoPlay: true,
-  autoPlaySpeed: 5000,
+  autoPlaySpeed: 3000,
   enableNextEndBack: true,
   //News
   arrowsInside: false,

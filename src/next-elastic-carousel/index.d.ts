@@ -94,7 +94,7 @@ export interface NextElasticCarouselProps {
   preventDefaultTouchmoveEvent?: boolean
   /** Enable or disable auto play - Defaults to true */
   enableAutoPlay?: boolean
-  /** Set auto play speed (ms) - Defaults to 5000 */
+  /** Set auto play speed (ms) - Defaults to 3000 */
   autoPlaySpeed?: number
   /**
    * Enable or disable the next prev back at the end of the carousel.
