@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 
 const ArrowWrapper = styled.div`

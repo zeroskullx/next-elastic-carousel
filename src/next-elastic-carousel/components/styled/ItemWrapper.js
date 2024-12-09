@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { cssPrefix } from '../../utils/helpers'

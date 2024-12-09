@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 
 const primaryColor = 'rgba(103, 58, 183, 1)'
