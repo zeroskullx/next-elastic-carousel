@@ -1091,13 +1091,13 @@ Carousel.defaultProps = {
   itemPosition: consts.CENTER,
   //itemPadding: [0, 0, 0, 0],
   outerSpacing: 0,
-  enableAutoPlay: false,
-  autoPlaySpeed: 2000,
+  enableAutoPlay: true,
+  autoPlaySpeed: 5000,
   enableNextEndBack: true,
   //News
   arrowsInside: false,
   slideSpacing: 0,
-  itemHeight: 280,
+  itemHeight: 84,
 
   // callbacks
   onChange: noop,
@@ -1114,11 +1114,23 @@ Carousel.propTypes = {
   /** Items to render */
   children: PropTypes.node.isRequired,
 
+  /** New: The height of the carousel */
+  itemHeight: PropTypes.number.isRequired,
+
+  /** New: Adds spacing between slides */
+  slideSpacing: PropTypes.number,
+
+  /** New: Renders the arrows inside or outside the carousel */
+  arrowsInside: PropTypes.bool,
+
+  /** The loading component to display when the carousel is not ready */
+  renderLoading: PropTypes.node,
+
   /** The css class for the root element */
   className: PropTypes.string,
 
-  /** The style object for the root element */
-  style: PropTypes.object,
+  /** Number of visible items  */
+  itemsToShow: PropTypes.number,
 
   /** Display the Carousel in a vertical layout */
   verticalMode: PropTypes.bool,
@@ -1140,9 +1152,6 @@ Carousel.propTypes = {
 
   /** The "bump" animation when reaching the last item */
   enableTilt: PropTypes.bool,
-
-  /** Number of visible items  */
-  itemsToShow: PropTypes.number,
 
   /** Number of items to scroll */
   itemsToScroll: PropTypes.number,
@@ -1174,29 +1183,8 @@ Carousel.propTypes = {
   /** Go to item on click */
   focusOnSelect: PropTypes.bool,
 
-  /** Automatically inject `tabIndex:0` to visible items */
-  autoTabIndexVisibleItems: PropTypes.bool,
-
-  /** A render prop for the arrow component
-   * - ({type, onClick}) => <div onClick={onClick}>{type === 'prev' ? '<-' : '->'}</div>
-   */
-  renderArrow: PropTypes.func,
-
-  /** A render prop for the pagination component
-   * - ({ pages, activePage, onClick }) =>  <YourComponent/>
-   */
-  renderPagination: PropTypes.func,
-
-  /** The loading component to display when the carousel is not ready */
-  renderLoading: PropTypes.node,
-
   /** Position the element relative to it's wrapper (use the consts object) - consts.START | consts.CENTER | consts.END */
   itemPosition: PropTypes.oneOf([consts.START, consts.CENTER, consts.END]),
-
-  /** A padding for each element  */
-  //itemPadding: PropTypes.array,
-
-  itemHeight: PropTypes.number.isRequired,
 
   /** A margin at the beginning and at the end of the carousel (not compatible with verticalMode yet !) */
   outerSpacing: PropTypes.number,
@@ -1224,6 +1212,22 @@ Carousel.propTypes = {
   /** Enable or disable the nextEndBack feature */
   enableNextEndBack: PropTypes.bool,
 
+  /** Automatically inject `tabIndex:0` to visible items */
+  autoTabIndexVisibleItems: PropTypes.bool,
+
+  /** The style object for the root element */
+  style: PropTypes.object,
+
+  /** A render prop for the arrow component
+   * - ({type, onClick}) => <div onClick={onClick}>{type === 'prev' ? '<-' : '->'}</div>
+   */
+  renderArrow: PropTypes.func,
+
+  /** A render prop for the pagination component
+   * - ({ pages, activePage, onClick }) =>  <YourComponent/>
+   */
+  renderPagination: PropTypes.func,
+
   // callbacks
   /** A callback for the change of an item
    * - onChange(currentItemObject, currentPageIndex) => {} */
@@ -1248,12 +1252,6 @@ Carousel.propTypes = {
   /** A callback for the "slider-container" resize
    * - onResize(currentBreakPoint) => {} */
   onResize: PropTypes.func,
-
-  /** New: Renders the arrows inside or outside the carousel */
-  arrowsInside: PropTypes.bool,
-
-  /** New: Adds spacing between slides */
-  slideSpacing: PropTypes.number,
 }
 
 export default Carousel

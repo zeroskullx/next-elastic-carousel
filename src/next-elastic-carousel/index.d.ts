@@ -30,9 +30,7 @@ export type Breakpoint = {
 export interface NextElasticCarouselProps {
   children: React.ReactNode
 
-  // Defaults to null
-  renderLoading?: React.ReactNode
-
+  // Defaults to 84
   itemHeight?: number | string
 
   // Defaults to 0
@@ -40,6 +38,9 @@ export interface NextElasticCarouselProps {
 
   // Defaults to false
   arrowsInside?: boolean
+
+  // Defaults to null
+  renderLoading?: React.ReactNode
 
   className?: string
   // Defaults to 1
@@ -78,14 +79,8 @@ export interface NextElasticCarouselProps {
   disableArrowsOnEnd?: boolean
   // Defaults to boolean
   focusOnSelect?: boolean
-  // Function to generate your own navigation arrows.
-  renderArrow?: (props: RenderArrowProps) => void
-  // Function to generate your own pagination component.
-  renderPagination?: (props: RenderPaginationProps) => JSX.Element
   // Defaults to "CENTER"
   itemPosition?: 'START' | 'CENTER' | 'END'
-  // A padding for each element - Defaults to [0,0,0,0]
-  //itemPadding?: number[]
   // A margin at the beginning and at the end of the carousel - Defaults to 0 (not compatible with verticalMode yet !)
   outerSpacing?: number
   // Enable or disable swipe - Defaults to true
@@ -97,9 +92,9 @@ export interface NextElasticCarouselProps {
    * More details: https://github.com/FormidableLabs/react-swipeable#preventdefaulttouchmoveevent-details
    */
   preventDefaultTouchmoveEvent?: boolean
-  // Enable or disable auto play - Defaults to true
+  /** Enable or disable auto play - Defaults to true */
   enableAutoPlay?: boolean
-  /** Set auto play speed (ms) - Defaults to 2000 */
+  /** Set auto play speed (ms) - Defaults to 5000 */
   autoPlaySpeed?: number
   /**
    * Enable or disable the next prev back at the end of the carousel.
@@ -107,6 +102,16 @@ export interface NextElasticCarouselProps {
    * - Defaults to true
    */
   enableNextEndBack?: boolean
+  /** Automatically inject `tabIndex:0` to visible items
+   * - Defaults to true
+   */
+  autoTabIndexVisibleItems?: boolean
+  /** The style object for the root element */
+  style?: React.CSSProperties
+  // Function to generate your own navigation arrows.
+  renderArrow?: (props: RenderArrowProps) => void
+  // Function to generate your own pagination component.
+  renderPagination?: (props: RenderPaginationProps) => JSX.Element
   // A callback for the change of an item
   onChange?: (currentItemObject: ItemObject, currentPageIndex: number) => void
   //  A callback for the beginning of the next transition
