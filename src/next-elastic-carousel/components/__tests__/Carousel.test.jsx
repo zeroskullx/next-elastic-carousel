@@ -3,10 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react'
 
 import Carousel from '../Carousel'
 import { numberToArray } from '../../utils/helpers'
-import { Pagination } from '../Pagination'
 
 describe('Carousel - public API (props)', () => {
-  const CustomPagination = () => <div data-testid="render_pagination">test</div>
 
   const Items = numberToArray(5).map((i) => (
     <div className="test-child" key={i}>
@@ -103,6 +101,42 @@ describe('Carousel - public API (props)', () => {
     const carousel = container.querySelector('.rec-carousel')
     expect(carousel).toBeInTheDocument()
   })
+
+  it("renderPagination (renders custom pagination)", () => {
+    const CustomPagination = () => <div>Render Pagination</div>;
+    const renderPagination = () => <CustomPagination />;
+
+    let componentInstance = null;
+
+    // Renders the component and captures the instance
+    React.act(() => {
+      render(
+        <Carousel
+          ref={(instance) => {
+            componentInstance = instance;
+          }}
+          renderPagination={renderPagination}
+        />
+      );
+    });
+
+    //console.log(componentInstance)
+
+    // Checks if the instance was captured
+    expect(componentInstance).not.toBeNull();
+
+    // Updates the state directly
+    React.act(() => {
+      componentInstance.setState({ rootHeight: 100 });
+    });
+
+    // Checks the updated state
+    expect(componentInstance.state.rootHeight).toBe(100);
+
+    expect(screen.getByText('Render Pagination')).toBeInTheDocument()
+
+  });
+
 })
 
 describe('Carousel - public CSS classnames', () => {
@@ -147,7 +181,7 @@ describe('Carousel - public CSS classnames', () => {
         </Carousel>
       )
 
-      const elementWithClass = container.querySelector(`.${withPrefix}`) // Assuming you've added data-testid to the elements
+      const elementWithClass = container.querySelector(`.${withPrefix}`)
 
       expect(elementWithClass).toBeInTheDocument()
     })
