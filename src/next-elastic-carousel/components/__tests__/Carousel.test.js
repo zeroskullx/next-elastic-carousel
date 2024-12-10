@@ -1,16 +1,19 @@
 import * as React from 'react'
+import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 
 import Carousel from '../Carousel'
 import { numberToArray } from '../../utils/helpers'
+import { snapshot } from '../../test'
 
 describe('Carousel - public API (props)', () => {
-
   const Items = numberToArray(5).map((i) => (
     <div className="test-child" key={i}>
       {i}
     </div>
   ))
+
+  snapshot(<Carousel>{Items}</Carousel>, 'default')
 
   it('renders without crashing', () => {
     render(<Carousel>{Items}</Carousel>)
@@ -102,41 +105,39 @@ describe('Carousel - public API (props)', () => {
     expect(carousel).toBeInTheDocument()
   })
 
-  it("renderPagination (renders custom pagination)", () => {
-    const CustomPagination = () => <div>Render Pagination</div>;
-    const renderPagination = () => <CustomPagination />;
+  it('renderPagination (renders custom pagination)', () => {
+    const CustomPagination = () => <div>Render Pagination</div>
+    const renderPagination = () => <CustomPagination />
 
-    let componentInstance = null;
+    let componentInstance = null
 
     // Renders the component and captures the instance
     React.act(() => {
       render(
         <Carousel
           ref={(instance) => {
-            componentInstance = instance;
+            componentInstance = instance
           }}
           renderPagination={renderPagination}
         />
-      );
-    });
+      )
+    })
 
     //console.log(componentInstance)
 
     // Checks if the instance was captured
-    expect(componentInstance).not.toBeNull();
+    expect(componentInstance).not.toBeNull()
 
     // Updates the state directly
     React.act(() => {
-      componentInstance.setState({ rootHeight: 100 });
-    });
+      componentInstance.setState({ rootHeight: 100 })
+    })
 
     // Checks the updated state
-    expect(componentInstance.state.rootHeight).toBe(100);
+    expect(componentInstance.state.rootHeight).toBe(100)
 
     expect(screen.getByText('Render Pagination')).toBeInTheDocument()
-
-  });
-
+  })
 })
 
 describe('Carousel - public CSS classnames', () => {

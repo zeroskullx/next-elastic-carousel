@@ -3141,7 +3141,7 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
   next-elastic-carousel@file:next-elastic-carousel-2.0.1.tgz:
-    resolution: {integrity: sha512-5ayrF1fXMxyWsibT4BbwOwOc9qWQQ5gQdfLDMm6ga82cqeURyVfLrTAXdOvNeHWYraoEjs6RVMPlomZ4r63a6g==, tarball: file:next-elastic-carousel-2.0.1.tgz}
+    resolution: {integrity: sha512-nYAbH/JPzKkfA+TRjEbbZsls9s5Lachax9t0m1zsiPbq1cOPYPdaAiZX3Gw8ftMXSGw8SbnZILk5IWtCW8iBCg==, tarball: file:next-elastic-carousel-2.0.1.tgz}
     version: 2.0.1
     engines: {node: '>=20', npm: '>=9'}
     peerDependencies:

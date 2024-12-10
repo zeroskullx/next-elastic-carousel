@@ -28,7 +28,8 @@
     "build:carousel": "rollup -c",
     "build:pack": "npm pack",
     "test": "jest",
-    "test:watch": "jest --watch --passWithNoTests --detectOpenHandles"
+    "test:watch": "jest --watch --passWithNoTests --detectOpenHandles",
+    "security:check": "pnpm audit --prod --audit-level=high"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
