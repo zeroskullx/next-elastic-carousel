@@ -655,7 +655,7 @@ class Carousel extends React.Component {
   }
 
   onNextEndBack = (activePage) => {
-    const { autoPlaySpeed, itemsToShow, enableNextEndBack } =
+    const { autoPlaySpeed, itemsToShow, enableNextEndBack, enableAutoPlay } =
       this.getDerivedPropsFromBreakPoint()
     const { pages } = this.state
 
@@ -663,11 +663,11 @@ class Carousel extends React.Component {
       return
     }
 
+    //console.log('onNextEndBack', activePage, pages.length, this.timeOutId)
+
     this.clearTimeOutId()
 
-    //console.log('onNextEnd', activePage, pages.length, this.timeOutId)
-
-    if (itemsToShow > 1) {
+    if (enableAutoPlay && itemsToShow > 1) {
       if (activePage === pages.length - 1) {
         this.timeOutId = setTimeout(() => {
           this.goTo(0, 'sys')
@@ -676,7 +676,9 @@ class Carousel extends React.Component {
       return
     }
 
-    if (activePage + 1 === pages.length) {
+    // Added enableAutoPlay to prevent the carousel from looping
+    // on the last item when enableAutoPlay is disabled.
+    if (enableAutoPlay && activePage + 1 === pages.length) {
       this.timeOutId = setTimeout(() => {
         this.goTo(0, 'sys')
       }, autoPlaySpeed) // same time
@@ -694,6 +696,9 @@ class Carousel extends React.Component {
     // if (this.isHoverActive) {
     //   return
     // }
+
+    // console.log('onPrevEnd')
+    // return
 
     const { onPrevEnd, onChange } = this.getDerivedPropsFromBreakPoint()
     const { activeIndex, activePage } = this.state
@@ -746,16 +751,19 @@ class Carousel extends React.Component {
 
     const { children, verticalMode, itemsToShow } =
       this.getDerivedPropsFromBreakPoint()
+
     const { activeIndex } = this.state
     const childrenLength = Children.toArray(children).length
     let safeNextItemId = Math.max(0, nextItemId) // don't allow negative numbers
     const isPrev = activeIndex > safeNextItemId // if we are going back
     const nextAvailableItem = this.getNextItemIndex(activeIndex, isPrev)
-    const noChange = nextAvailableItem === activeIndex
     const outOfBoundary = safeNextItemId + itemsToShow >= childrenLength
+
+    const noChange = nextAvailableItem === activeIndex
     if (noChange) {
       return
     }
+
     if (outOfBoundary) {
       // Either go to last index (respect itemsToShow) or 0 index if we can't fill the slider
       safeNextItemId = Math.max(0, childrenLength - itemsToShow)
@@ -786,6 +794,17 @@ class Carousel extends React.Component {
         }
       }
     }
+
+    // console.log('GOTO....:', {
+    //   nextItemId,
+    //   deOnde,
+    //   isActionBlock,
+    //   nextAvailableItem,
+    //   safeNextItemId,
+    //   noChange,
+    //   activeIndex,
+    //   childrenLength,
+    // })
 
     let direction = consts.NEXT
     let positionEndCb = this.onNextEnd
@@ -1091,13 +1110,13 @@ Carousel.defaultProps = {
   itemPosition: consts.CENTER,
   //itemPadding: [0, 0, 0, 0],
   outerSpacing: 0,
-  enableAutoPlay: true,
+  enableAutoPlay: false, //TODO: era true
   autoPlaySpeed: 3000,
   enableNextEndBack: true,
   //News
   arrowsInside: false,
   slideSpacing: 0,
-  itemHeight: 84,
+  itemHeight: 120,
 
   // callbacks
   onChange: noop,
