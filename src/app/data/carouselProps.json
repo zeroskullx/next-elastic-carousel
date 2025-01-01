@@ -1,0 +1,243 @@
+[
+  {
+    "name": "children",
+    "type": "element",
+    "default": "",
+    "description": "Items to render",
+    "isRequired": true
+  },
+  {
+    "name": "itemHeight",
+    "type": "number",
+    "default": "",
+    "description": "The height of the carousel"
+  },
+  {
+    "name": "slideSpacing",
+    "type": "number",
+    "default": "",
+    "description": "Adds spacing between slides"
+  },
+  {
+    "name": "arrowsInside",
+    "type": "boolean",
+    "default": "",
+    "description": "Renders the arrows inside or outside the carousel"
+  },
+  {
+    "name": "renderLoading",
+    "type": "element",
+    "default": "",
+    "description": "The loading component to display when the carousel is not ready"
+  },
+  {
+    "name": "className",
+    "type": "string",
+    "default": "",
+    "description": "The css class for the root element"
+  },
+  {
+    "name": "itemsToShow",
+    "type": "number",
+    "default": "",
+    "description": "Number of visible items"
+  },
+  {
+    "name": "verticalMode",
+    "type": "boolean",
+    "default": "",
+    "description": "Display the Carousel in a vertical layout"
+  },
+  {
+    "name": "isRTL",
+    "type": "boolean",
+    "default": "",
+    "description": "Flip right to left"
+  },
+  {
+    "name": "pagination",
+    "type": "boolean",
+    "default": "",
+    "description": "Show dots for paging"
+  },
+  {
+    "name": "transitionMs",
+    "type": "number",
+    "default": "",
+    "description": "Animation speed"
+  },
+  {
+    "name": "easing",
+    "type": "string",
+    "default": "",
+    "description": "Transition easing pattern"
+  },
+  {
+    "name": "tiltEasing",
+    "type": "string",
+    "default": "",
+    "description": "Transition easing pattern for the tilt"
+  },
+  {
+    "name": "enableTilt",
+    "type": "boolean",
+    "default": "",
+    "description": "The 'bump' animation when reaching the last item"
+  },
+  {
+    "name": "itemsToScroll",
+    "type": "number",
+    "default": "",
+    "description": "Number of items to scroll"
+  },
+  {
+    "name": "breakPoints",
+    "type": "array",
+    "default": "",
+    "description": "Collection of objects with a width, itemsToShow, and itemsToScroll"
+  },
+  {
+    "name": "initialActiveIndex",
+    "type": "number",
+    "default": "",
+    "description": "The initial active index when the component mounts"
+  },
+  {
+    "name": "initialFirstItem",
+    "type": "number",
+    "default": "",
+    "description": "**DEPRECATED - use initialActiveIndex instead** The first item when the component mounts"
+  },
+  {
+    "name": "showArrows",
+    "type": "boolean",
+    "default": "",
+    "description": "Show the arrow buttons"
+  },
+  {
+    "name": "showEmptySlots",
+    "type": "boolean",
+    "default": "",
+    "description": "Show empty slots when children.length < itemsToShow (not compatible with verticalMode yet!)"
+  },
+  {
+    "name": "disableArrowsOnEnd",
+    "type": "boolean",
+    "default": "",
+    "description": "Disables the arrow button when there are no more items"
+  },
+  {
+    "name": "focusOnSelect",
+    "type": "boolean",
+    "default": "",
+    "description": "Go to item on click"
+  },
+  {
+    "name": "itemPosition",
+    "type": "string",
+    "default": "",
+    "description": "Position the element relative to its wrapper (use the consts object: START, CENTER, or END)"
+  },
+  {
+    "name": "outerSpacing",
+    "type": "number",
+    "default": "",
+    "description": "A margin at the beginning and at the end of the carousel"
+  },
+  {
+    "name": "enableSwipe",
+    "type": "boolean",
+    "default": "",
+    "description": "Enable or disable swipe"
+  },
+  {
+    "name": "enableMouseSwipe",
+    "type": "boolean",
+    "default": "",
+    "description": "Enable or disable mouse swipe"
+  },
+  {
+    "name": "preventDefaultTouchmoveEvent",
+    "type": "boolean",
+    "default": "",
+    "description": "Prevent page scroll on touchmove"
+  },
+  {
+    "name": "enableAutoPlay",
+    "type": "boolean",
+    "default": "",
+    "description": "Enable or disable auto play"
+  },
+  {
+    "name": "autoPlaySpeed",
+    "type": "number",
+    "default": "",
+    "description": "Set auto play speed (ms)"
+  },
+  {
+    "name": "enableNextEndBack",
+    "type": "boolean",
+    "default": "",
+    "description": "Enable or disable the nextEndBack feature"
+  },
+  {
+    "name": "autoTabIndexVisibleItems",
+    "type": "boolean",
+    "default": "",
+    "description": "Automatically inject `tabIndex:0` to visible items"
+  },
+  {
+    "name": "style",
+    "type": "object",
+    "default": "",
+    "description": "The style object for the root element"
+  },
+  {
+    "name": "renderArrow",
+    "type": "function",
+    "default": "",
+    "description": "A render prop for the arrow component"
+  },
+  {
+    "name": "renderPagination",
+    "type": "function",
+    "default": "",
+    "description": "A render prop for the pagination component"
+  },
+  {
+    "name": "onChange",
+    "type": "function",
+    "default": "",
+    "description": "A callback for the change of an item"
+  },
+  {
+    "name": "onNextStart",
+    "type": "function",
+    "default": "",
+    "description": "A callback for the beginning of the next transition"
+  },
+  {
+    "name": "onPrevStart",
+    "type": "function",
+    "default": "",
+    "description": "A callback for the beginning of the prev transition"
+  },
+  {
+    "name": "onNextEnd",
+    "type": "function",
+    "default": "",
+    "description": "A callback for the end of the next transition"
+  },
+  {
+    "name": "onPrevEnd",
+    "type": "function",
+    "default": "",
+    "description": "A callback for the end of the prev transition"
+  },
+  {
+    "name": "onResize",
+    "type": "function",
+    "default": "",
+    "description": "A callback for the 'slider-container' resize"
+  }
+]

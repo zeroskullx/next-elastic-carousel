@@ -1,0 +1,31 @@
+.card_root {
+  padding: 0.25rem;
+  width: 100%;
+
+  .card_content {
+    --radius: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+
+    color: rgb(var(--color-700));
+    border-radius: var(--radius);
+    border-width: 0px;
+    border-color: var(--cr-border-color);
+    box-shadow: var(--cr-shadow);
+    &.shadow_sm {
+      --cr-shadow: 0 0 2px 0 rgba(var(--color-300), 1);
+    }
+    &.border_sm {
+      border-width: 1px;
+      --cr-border-color: rgb(var(--color-400));
+    }
+    &.height_md {
+      height: 200px;
+    }
+    // --cr-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  }
+}

@@ -1,0 +1,20 @@
+.markdown_root {
+  position: relative;
+}
+
+.copy_button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: rgb(202, 208, 216);
+  background: rgba(var(--card-rgb), 0.1);
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
+  cursor: pointer;
+  &:hover {
+    color: #fff;
+    background: rgba(var(--card-rgb), 0.2);
+    border-color: rgba(var(--card-border-rgb), 0.9);
+  }
+}

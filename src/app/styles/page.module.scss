@@ -7,6 +7,20 @@
 //   min-height: 100vh;
 // }
 
+.page_relative {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  background-color: hsl(var(--background));
+}
+.page_flex {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  border-color: hsl(var(--border) / 0.3);
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

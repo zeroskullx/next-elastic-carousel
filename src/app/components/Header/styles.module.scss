@@ -1,0 +1,14 @@
+header.header {
+  --tw-backdrop-blur: blur(8px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom-width: 1px;
+  border-color: hsl(var(--border) / 0.3);
+
+  backdrop-filter: var(--tw-backdrop-blur);
+  .h {
+    height: 3.5rem;
+  }
+}

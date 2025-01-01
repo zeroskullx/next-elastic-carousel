@@ -38,6 +38,39 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+  --scroll-margin-top: 4.5rem;
+
+  //My
+  --color: 240 5.9% 90%;
+  --bg: 240 5.9% 90%;
+  --border: 240 5.9% 90%;
+  --background: 0 0% 100%;
+
+  //Default colors
+  --zinc-050: 250, 250, 250;
+  --zinc-100: 244, 244, 245;
+  --zinc-200: 228, 228, 231;
+  --zinc-300: 212, 212, 216;
+  --zinc-400: 161, 161, 170;
+  --zinc-500: 113, 113, 122;
+  --zinc-600: 82, 82, 91;
+  --zinc-700: 63, 63, 70;
+  --zinc-800: 39, 39, 42;
+  --zinc-900: 26, 26, 30;
+  --zinc-950: 14, 14, 17;
+
+  //Light Mode Purple-Heart
+  --color-050: 242, 240, 255;
+  --color-100: 234, 230, 255;
+  --color-200: 221, 204, 255;
+  --color-300: 204, 153, 255;
+  --color-400: 187, 102, 255;
+  --color-500: 153, 0, 255;
+  --color-600: 127, 0, 212;
+  --color-700: 102, 0, 170;
+  --color-800: 76, 0, 127;
+  --color-900: 51, 0, 85;
+  --color-950: 25, 0, 42;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -77,12 +110,11 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  border: 0 solid #e5e7eb;
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -98,6 +130,44 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.title_h1,
+.title_h2,
+.title_h3 {
+  font-weight: 600;
+  line-height: 1.5;
+  scroll-margin-top: var(--scroll-margin-top);
+}
+.title_h1 {
+  color: rgb(var(--color-900));
+  font-size: 2.25rem;
+  letter-spacing: -0.2px;
+}
+
+.title_h2 {
+  color: rgb(var(--color-800));
+  font-size: 1.75rem;
+  letter-spacing: 0.1px;
+}
+
+.title_h3 {
+  color: rgb(var(--color-700));
+  font-size: 1.25rem;
+}
+.sub_title {
+  color: rgb(var(--zinc-500));
+  font-size: 1.125rem;
+  line-height: 1.33333;
+  letter-spacing: 0px;
+  margin-bottom: 1.5rem;
+}
+.text {
+  color: rgb(var(--zinc-600));
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  margin-bottom: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {

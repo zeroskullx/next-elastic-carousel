@@ -1,0 +1,116 @@
+.main {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+  min-height: 120vh;
+  .container_wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-color: hsl(var(--border) / 0.3);
+  }
+}
+
+.container {
+  width: 100%;
+  flex: 1 1 0%;
+  align-items: flex-start;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1536px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media (min-width: 640px) {
+    max-width: 640px;
+  }
+  @media (min-width: 768px) {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 768px;
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+  @media (min-width: 1280px) {
+    max-width: 1280px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.sidebar {
+  display: none;
+  width: 100%;
+  height: calc(100vh - 4rem);
+  top: 3.5rem;
+  flex-shrink: 0;
+  border-color: hsl(var(--border) / 0.3);
+  border-right-width: 1px;
+  z-index: 30;
+  .sb_content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1.65rem;
+    padding-bottom: 2rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 768px) {
+    display: block;
+    position: sticky;
+  }
+}
+
+.content_slot {
+  position: relative;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  .main {
+    max-width: 42rem;
+    min-width: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sector_nav {
+    display: none;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    @media (min-width: 1280px) {
+      display: block;
+    }
+  }
+  @media (min-width: 1280px) {
+    grid-template-columns: 1fr 300px;
+    display: grid;
+  }
+  @media (min-width: 1024px) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    gap: 2.5rem;
+  }
+}
+
+.sector_nav_itens {
+  padding-top: 1rem;
+  height: calc(100vh - 3.5rem);
+  margin-top: -1.5rem;
+  top: 5rem;
+  position: sticky;
+}
+
+.link {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-weight: 400;
+  border-radius: 0.375rem;
+  color: hsl(var(--text));
+  text-decoration: none;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: hsl(var(--bg));
+  }
+}
