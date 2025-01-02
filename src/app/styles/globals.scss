@@ -125,6 +125,9 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  &.scroll-lock {
+    overflow: hidden;
+  }
 }
 
 a {
@@ -213,5 +216,18 @@ a {
         background-color: #000;
       }
     }
+  }
+}
+
+.vault-drawer {
+  transform-origin: center top;
+  transition-property: transform, border-radius;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  &.open {
+    border-radius: 8px;
+    overflow: hidden;
+    transform: scale(0.9277777777777778)
+      translate3d(0, calc(env(safe-area-inset-top) + 14px), 0);
   }
 }

@@ -10,5 +10,200 @@ header.header {
   backdrop-filter: var(--tw-backdrop-blur);
   .h {
     height: 3.5rem;
+    align-items: center;
+    display: flex;
   }
+}
+
+.btn {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.35rem;
+}
+
+.logoWrapper {
+  display: flex;
+  .logo {
+    display: flex;
+    flex-direction: row;
+    & > span {
+      &:first-child {
+        justify-content: center;
+        margin-right: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        background-color: rgb(var(--color-700));
+        svg {
+          width: 1.35rem;
+          height: 1.35rem;
+          path {
+            stroke: rgb(var(--zinc-050));
+          }
+        }
+      }
+      &:last-child {
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: rgb(var(--color-900));
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .logo {
+      & > span {
+        &:first-child {
+          width: 1.75rem;
+          height: 1.75rem;
+          svg {
+            width: 1.25rem;
+            height: 1.25rem;
+          }
+        }
+        &:last-child {
+          font-size: 1.15rem;
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  gap: 0.25rem;
+  .gh {
+    svg {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+    .act_btn {
+      // background-color: rgb(var(--color-700));
+      // color: rgb(var(--zinc-050));
+      transition:
+        background-color 0.2s,
+        color 0.2s;
+      &:hover {
+        background-color: rgb(var(--color-050));
+        color: rgb(var(--color-700));
+      }
+    }
+  }
+  .btn_drawer {
+    display: none;
+    margin-right: -0.5rem;
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+}
+
+.drawer_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgba(0, 0, 0, 0.67);
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  opacity: 1;
+  animation-name: fadeIn;
+  pointer-events: auto;
+  &.fadeOut {
+    animation-name: fadeOut;
+    pointer-events: none;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+  }
+}
+.drawer_content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  margin-top: 6rem;
+  display: flex;
+  height: auto;
+  max-height: 60svh;
+  min-height: 40svh;
+  flex-direction: column;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-width: 1px;
+  background-color: rgb(var(--zinc-050));
+  padding: 0;
+  pointer-events: auto;
+
+  touch-action: none;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  &.slideFromBottom {
+    animation-name: slideFromBottom;
+  }
+  &.slideToBottom {
+    animation-name: slideToBottom;
+  }
+
+  .drawer_content_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.25rem 1.5rem;
+
+    .drawer_close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.35rem;
+      transition:
+        background-color 0.2s,
+        color 0.2s;
+      &:hover {
+        background-color: rgb(var(--color-050));
+        color: rgb(var(--color-700));
+      }
+    }
+  }
+}
+
+@keyframes slideFromBottom {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideToBottom {
+  100% {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.drawer_content_body {
+  padding: 0.5rem 1.5rem 3rem;
 }
