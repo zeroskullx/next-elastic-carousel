@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 import NextElasticCarousel from 'next-elastic-carousel'
 import { Wrapper } from './components/layout/Wrapper'
-import { HomeMain } from './view/home/Main'
+import { HomePage } from './view/home'
 import { HomeSectorNav } from './view/home/SectorNav'
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
   //const totalPages = 3
 
   return (
-    <Wrapper mainChildren={<HomeMain />} sectorNav={<HomeSectorNav />} />
+    <Wrapper mainChildren={<HomePage />} sectorNav={<HomeSectorNav />} />
 
     // <div className={styles.main}>
     //   <div className={styles.header}>

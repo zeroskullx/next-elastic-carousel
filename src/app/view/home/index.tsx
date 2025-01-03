@@ -12,7 +12,7 @@ import { ChevronDown } from '@/app/assets/Chevron-down'
 import data from '@/app/data/carouselProps.json'
 // import {  } from './Table' //TODO: Table to be implemented in the future
 
-export function HomeMain() {
+export function HomePage() {
   const [isOpenAll, setIsOpenAll] = useState(false)
 
   const _install = `
