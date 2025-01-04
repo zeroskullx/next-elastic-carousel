@@ -226,7 +226,7 @@ class Carousel extends React.Component {
       return
     }
 
-    const { verticalMode, children, itemsToShow, slideSpacing } =
+    const { verticalMode, children, itemsToShow, slideSpacing, itemHeight } =
       this.getDerivedPropsFromBreakPoint()
     const { height: sliderHeight } = sliderNode.contentRect
     const nextState = {}
@@ -240,7 +240,7 @@ class Carousel extends React.Component {
         childHeight * Math.min(childrenLength, itemsToShow) - slideSpacing
       nextState.childHeight = childHeight
     } else {
-      nextState.rootHeight = sliderHeight
+      nextState.rootHeight = itemHeight > 0 ? itemHeight : sliderHeight
     }
     this.setState(nextState)
   }
@@ -1116,7 +1116,7 @@ Carousel.defaultProps = {
   //News
   arrowsInside: false,
   slideSpacing: 0,
-  itemHeight: 120,
+  itemHeight: 0,
 
   // callbacks
   onChange: noop,
