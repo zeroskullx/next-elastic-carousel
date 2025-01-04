@@ -13,7 +13,7 @@ const ArrowWrapper = styled.div`
     (props.direction === 'right' || props.direction === 'down') &&
     '4px'};
   height: ${(props) => `${props.itemHight}px`};
-  z-index: 1;
+  z-index: 2;
 `
 
 export default ArrowWrapper

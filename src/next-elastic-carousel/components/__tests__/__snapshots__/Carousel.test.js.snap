@@ -12,7 +12,7 @@ exports[`Carousel - public API (props) default 1`] = `
       overflow="visible"
     >
       <div
-        class="rec rec-arrow rec-arrow-left css-1kjr7xd"
+        class="rec rec-arrow rec-arrow-left css-1oqc8pm"
         direction="left"
       >
         <button
@@ -40,7 +40,7 @@ exports[`Carousel - public API (props) default 1`] = `
         </button>
       </div>
       <div
-        class="rec rec-slider-container css-2mrzk5"
+        class="rec rec-slider-container css-1vtkql"
       >
         <div
           class="rec rec-slider css-11ve2d9"
@@ -134,7 +134,7 @@ exports[`Carousel - public API (props) default 1`] = `
         </div>
       </div>
       <div
-        class="rec rec-arrow rec-arrow-right css-1kjr7xd"
+        class="rec rec-arrow rec-arrow-right css-1oqc8pm"
         direction="right"
       >
         <button
