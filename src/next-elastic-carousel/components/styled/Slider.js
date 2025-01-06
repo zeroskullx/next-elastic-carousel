@@ -1,6 +1,5 @@
-import styled from '@emotion/styled'
-
 import * as React from 'react'
+import styled from '@emotion/styled'
 
 const calcLeft = ({
   isRTL,
@@ -49,13 +48,6 @@ const calcTransition = ({ isSwiping, transitionMs, easing, tiltEasing }) => {
   return `all ${duration}ms ${effectiveEasing}`
 }
 
-const calcSlideSpacing = ({ slideSpacing, currentItem, verticalMode }) => {
-  if (verticalMode) {
-    return slideSpacing
-  }
-  return slideSpacing * currentItem + slideSpacing
-}
-
 const SliderContainer = styled.div((props) => ({
   position: 'absolute',
   display: 'flex',
@@ -64,13 +56,7 @@ const SliderContainer = styled.div((props) => ({
 }))
 
 const Slider = React.forwardRef((props, ref) => {
-  const { children, slideSpacing, activePage, verticalMode, ...rest } = props
-
-  const _activePage = calcSlideSpacing({
-    verticalMode,
-    slideSpacing,
-    currentItem: props.currentItem,
-  })
+  const { children, activePage, verticalMode, ...rest } = props
 
   return (
     <SliderContainer
@@ -80,8 +66,6 @@ const Slider = React.forwardRef((props, ref) => {
         left: calcLeft(props),
         right: calcRight(props),
         top: calcTop(props),
-        marginLeft: verticalMode ? '' : `-${_activePage}px`,
-        marginTop: verticalMode ? `-${_activePage}px` : '',
       }}
       verticalMode={verticalMode}
       {...rest}

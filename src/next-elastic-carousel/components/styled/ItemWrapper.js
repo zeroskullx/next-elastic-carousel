@@ -1,16 +1,17 @@
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
+
 import { cssPrefix } from '../../utils/helpers'
 import consts from '../../constants'
 
 const ItemWrapperContent = styled('div', {
-  shouldForwardProp: (prop) => prop !== 'itemposition',
-})(({ itemposition, style }) => ({
+  shouldForwardProp: (prop) => prop !== 'itemPosition',
+})(({ itemPosition, style }) => ({
   boxSizing: 'border-box',
   display: 'flex',
   overflow: 'hidden',
   userSelect: 'none',
-  justifyContent: itemposition,
+  justifyContent: itemPosition,
   ...style, // Adiciona estilos dinamicamente
 }))
 
@@ -27,7 +28,7 @@ function ItemWrapper({
       key={idx}
       style={style}
       className={cssPrefix('item-wrapper')}
-      itemposition={itemPosition}
+      itemPosition={itemPosition}
       onClick={onItemClick}
     >
       {children}

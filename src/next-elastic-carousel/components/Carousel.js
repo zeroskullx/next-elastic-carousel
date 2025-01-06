@@ -247,13 +247,8 @@ class Carousel extends React.Component {
 
   calculateChildWidth = () => {
     const { sliderContainerWidth } = this.state
-    const {
-      verticalMode,
-      itemsToShow,
-      showEmptySlots,
-      children,
-      slideSpacing,
-    } = this.getDerivedPropsFromBreakPoint()
+    const { verticalMode, itemsToShow, showEmptySlots, children } =
+      this.getDerivedPropsFromBreakPoint()
 
     /* based on slider container's width, get num of items to show
      * and calculate child's width (and update it in state)
@@ -271,18 +266,6 @@ class Carousel extends React.Component {
       childWidth =
         sliderContainerWidth /
         (showEmptySlots ? itemsToShow : Math.min(childrenLength, itemsToShow))
-
-      //if (itemsToShow > 1) childWidth = childWidth - slideSpacing / itemsToShow
-
-      if (itemsToShow > 1) {
-        let x = itemsToShow - 1
-        let y = x * slideSpacing
-        let z = sliderContainerWidth - y
-
-        childWidth = z / itemsToShow
-      }
-
-      //console.log('childWidthXXXX', sliderContainerWidth, childWidth)
     }
 
     return childWidth
@@ -1020,7 +1003,6 @@ class Carousel extends React.Component {
                 ref={this.setRef('slider')}
                 outerSpacing={outerSpacing}
                 activePage={activePage}
-                slideSpacing={slideSpacing}
                 currentItem={activeIndex}
               >
                 <Track

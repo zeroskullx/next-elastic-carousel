@@ -5,6 +5,22 @@ import { useSwipeable } from 'react-swipeable'
 import { cssPrefix } from '../utils/helpers'
 import ItemWrapperContainer from './ItemWrapperContainer'
 
+/**
+ * Calculate the width of a slide based on spacing and orientation.
+ *
+ * @param {number} width - The width of the slide.
+ * @param {number} spacing - The spacing between slides.
+ * @param {boolean} isVertical - Whether the layout is in vertical mode.
+ * @returns {string} - The calculated width in pixels as a string.
+ */
+const calculateSlideWidth = (width, spacing, isVertical) => {
+  if (spacing > 0 && !isVertical) {
+    return `${width - spacing}px`
+  }
+
+  return `${width}px`
+}
+
 const Track = ({
   children,
   childWidth,
@@ -22,8 +38,8 @@ const Track = ({
   verticalMode,
   onItemClick,
 }) => {
-  const width = `${childWidth}px`
-  //const paddingStyle = '' //`${itemPadding?.join('px ')}px`
+  const width = calculateSlideWidth(childWidth, slideSpacing, verticalMode)
+
   const minVisibleItem = currentItem
   const maxVisibleItem = currentItem + itemsToShow
   const prevItem = minVisibleItem - itemsToScroll
@@ -50,10 +66,12 @@ const Track = ({
           isPrevItem && `${itemClass}-prev`,
           isNextItem && `${itemClass}-next`
         )}
-        //Aqui é onde o padding é aplicado
+        //Aqui é onde o slideSpacing é aplicado
         style={{
-          paddingLeft: verticalMode ? '' : `${slideSpacing}px`,
+          paddingLeft: verticalMode ? '' : `${slideSpacing / 2}px`,
+          paddingRight: verticalMode ? '' : `${slideSpacing / 2}px`,
           paddingTop: verticalMode ? `${slideSpacing}px` : '',
+          paddingBottom: verticalMode ? `${slideSpacing}px` : '',
         }}
       >
         <ItemWrapperContainer
@@ -75,8 +93,6 @@ const Track = ({
     trackMouse: enableMouseSwipe,
     onSwiped: onSwiped,
     onSwiping: onSwiping,
-    //className: cssPrefix('swipable'),
-
     enableMouseSwipe: enableMouseSwipe,
     enableSwipe: enableSwipe,
   })
