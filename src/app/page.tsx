@@ -2,10 +2,17 @@
 
 import { useRef } from 'react'
 
-import NextElasticCarousel from 'next-elastic-carousel'
 import { Wrapper } from './components/layout/Wrapper'
 import { HomePage } from './view/home'
-import { HomeSectorNav } from './view/home/SectorNav'
+import { SectorNav } from './components/SectorNav'
+
+const goto = [
+  { name: 'Install', url: '#install' },
+  { name: 'Import', url: '#import' },
+  { name: 'Basic', url: '#basic' },
+  { name: 'Code', url: '#code' },
+  { name: 'Props', url: '#props' },
+]
 
 export default function Home() {
   const carouselRef = useRef<any>(null)
@@ -15,7 +22,10 @@ export default function Home() {
   //const totalPages = 3
 
   return (
-    <Wrapper mainChildren={<HomePage />} sectorNav={<HomeSectorNav />} />
+    <Wrapper
+      mainChildren={<HomePage />}
+      sectorNav={<SectorNav goto={goto} />}
+    />
 
     // <div className={styles.main}>
     //   <div className={styles.header}>

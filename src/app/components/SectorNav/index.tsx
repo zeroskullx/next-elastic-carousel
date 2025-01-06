@@ -1,18 +1,21 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 
 import s from './styles.module.scss'
 
-const goto = [
-  { name: 'Install', url: '/#install' },
-  { name: 'Import', url: '/#import' },
-  { name: 'Basic', url: '/#basic' },
-  { name: 'Code', url: '/#code' },
-  { name: 'Props', url: '/#props' },
-]
+type GotoData = {
+  name: string
+  url: string
+}
 
-export function HomeSectorNav() {
+type SectorNavProps = {
+  goto: GotoData[]
+}
+
+export function SectorNav({ goto }: SectorNavProps) {
   const [activeHash, setActiveHash] = useState<string | null>(null)
   const sectionsRef = useRef<Record<string, HTMLElement | null>>({})
 
@@ -22,7 +25,7 @@ export function HomeSectorNav() {
       entries.forEach((entry) => {
         const id = entry.target.id
         if (entry.isIntersecting) {
-          setActiveHash(`/#${id}`)
+          setActiveHash(`#${id}`)
         }
       })
     }
@@ -35,7 +38,7 @@ export function HomeSectorNav() {
 
     // Observar as seções
     goto.forEach((item) => {
-      const section = document.getElementById(item.url.replace('/#', ''))
+      const section = document.getElementById(item.url.replace('#', ''))
       if (section) {
         sectionsRef.current[item.url] = section
         observer.observe(section)

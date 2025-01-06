@@ -172,6 +172,16 @@ a {
   letter-spacing: 0px;
   margin-bottom: 1.5rem;
 }
+.link {
+  color: rgb(var(--color-500));
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  margin-bottom: 1.5rem;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 
 @media (prefers-color-scheme: dark) {
   html {

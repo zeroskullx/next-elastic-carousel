@@ -1,0 +1,7 @@
+{
+  "arrowsToShow": { "id": "arrows-to-show", "name": "Arrows To Show" },
+  "ItemToScroll": { "id": "item-to-scroll", "name": "Item To Scroll" },
+  "VerticalMode": { "id": "vertical-mode", "name": "Vertical Mode" },
+  "IsRightToLeft": { "id": "is-right-to-left", "name": "Is Right To Left?" },
+  "easing": { "id": "easing", "name": "Easing" }
+}

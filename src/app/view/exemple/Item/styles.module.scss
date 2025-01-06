@@ -1,0 +1,122 @@
+.item_wrapper {
+  height: 200px;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+  // border-color: #d4d4d8;
+
+  overflow: hidden;
+  border-radius: 0.5rem;
+
+  //margin-bottom: 1rem;
+  .item_title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4b5563;
+    //margin-bottom: 1rem;
+    z-index: 2;
+  }
+}
+
+.radial_01 {
+  background: radial-gradient(circle, #00b09b 0%, #96c93d 31%, #ffffff00 62%);
+}
+
+.circle {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+}
+.circle_01 {
+  height: 15rem;
+  width: 15rem;
+  top: -4rem;
+  left: 0;
+  //background-color: rgb(237, 206, 255);
+  animation: moveUpDown01 13s ease-in-out infinite;
+  //transform: translate(-50%, 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
+  z-index: 3;
+  &.valentino {
+    background-color: rgb(232, 212, 250);
+  }
+  &.jade {
+    background-color: #aeecca;
+  }
+  &.sky {
+    background-color: #bae6fd;
+  }
+  &.burgundy {
+    background-color: #ffc2cb;
+  }
+  &.citron {
+    background-color: #f6f0a0;
+  }
+  &.violet {
+    background-color: #ddd6fe;
+  }
+}
+
+.circle_02 {
+  height: 24rem;
+  width: 24rem;
+  bottom: -12rem;
+  right: -18rem;
+  //background-color: rgb(212, 114, 255);
+  //transform: translate(-50%, 0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
+  animation: moveUpDown02 12s ease-in-out infinite;
+
+  z-index: 1;
+  &.valentino {
+    background-color: #c485ed;
+  }
+  &.jade {
+    background-color: #43c48a;
+  }
+  &.sky {
+    background-color: #38bdf8;
+  }
+  &.burgundy {
+    background-color: #ff5b74;
+  }
+  &.citron {
+    background-color: #e0d93b;
+  }
+  &.violet {
+    background-color: #a78bfa;
+  }
+}
+
+@keyframes moveUpDown01 {
+  0% {
+    //transform: translateY(0);
+    transform: translate(0, 30%) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
+  }
+  50% {
+    //transform: translateY(-2rem);
+    transform: translate(0%, 0%) rotate(0) skewX(0) skewY(0) scaleX(1.2)
+      scaleY(1);
+  }
+  100% {
+    //transform: translateY(0);
+    transform: translate(0, 30%) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1);
+  }
+}
+
+@keyframes moveUpDown02 {
+  0% {
+    transform: translate(-50%, 0) rotate(0) skewX(0) skewY(0) scaleX(1)
+      scaleY(1);
+  }
+  50% {
+    transform: translate(-25%, 11%) rotate(0) skewX(0) skewY(0) scaleX(1.2)
+      scaleY(1);
+  }
+  100% {
+    transform: translate(-50%, 0) rotate(0) skewX(0) skewY(0) scaleX(1)
+      scaleY(1);
+  }
+}
